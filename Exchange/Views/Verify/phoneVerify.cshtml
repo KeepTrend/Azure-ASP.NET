@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "phoneVerify";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/vendor/intl-tel-input/build/css/intlTelInput.css">
+<script src="~/vendor/intl-tel-input/build/js/intlTelInput.js"></script>
+<script src="~/vendor/intl-tel-input/build/js/utils.js"></script>
+
+<section id="">
+    <div class="content margin-bottom60">
+        <div class="container">
+            <div class="m-t-100 row">
+                <div id="sidebar" class="sidebar col-3">
+                    <div class="">
+                        <h3 class="text-green font-weight-bold">BTCUSD</h3>
+                        <h3 class="text-white" id="currentPrice"></h3>
+                        <h4 class="text-white">price now</h4>
+                    </div>
+                </div>
+                <!-- Left Section -->
+                <div class="col-9 p-l-50 m-t-50">
+                    <div id="information" class="p-l-30">
+                        <div class="m-b-30">
+                            <h4 class="text-white">Please verify your phone.</h4>
+                        </div>
+                        <div class="alert alert-danger w-50" id="disp_err" style=" display:none">
+                            <strong>Error!</strong><p id="err_content"></p>
+                        </div>
+                        <div class="wrap-input100 validate-input m-b-16" data-validate="Phone Number is required">
+                            <input class="input100" type="text" name="phone" placeholder="" id="phone">
+                            <span class="focus-input100"></span>
+                        </div>
+                    </div>
+                    <div class="m-t-30">
+                        @Html.ActionLink("BACK", "index", "Home", null, htmlAttributes: new { @class = "text-white fs-10 back-link" })
+                        <button class="btn login100-form-btn bg-green text-white btn-width" id="btn_next">
+                            SEND CODE TO MY PHONE
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Main Content -->
+</section>
+<script>
+    $(document).ready(function () {
+        var input = document.querySelector("#phone");
+        var iti = window.intlTelInput(input, {
+            initialCountry: "auto",
+            separateDialCode:true,
+          geoIpLookup: function(callback) {
+            $.get('https://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+              var countryCode = (resp && resp.country) ? resp.country : "";
+              callback(countryCode);
+            });
+          },
+          utilsScript: "~vendor/intl-tel-input/build/js/utils.js?1537727621611" // just for formatting/placeholders etc
+        });
+        $("#disp_err").hide();
+        $("#btn_next").click(function () {
+            var number = iti.getNumber(intlTelInputUtils.numberFormat.E164);
+            $.ajax({
+                url: "@Url.Action("SendMessage", "Verify")",
+                method: "post",
+                data: JSON.stringify({
+                    phone: number,
+                    countryCode: iti.getSelectedCountryData().iso2
+                }),
+                contentType: 'application/json',
+                success: function (result) {
+                    if (result == "success") {
+                        location.href = "@Url.Action("codePage", "Verify")";
+                    } else if (result == "exist") {
+                        $("#err_content").html("Phone number already exist.");
+                        $("#disp_err").show();
+                    }else {
+                        $("#err_content").html("Phone number isn't correct.");
+                        $("#disp_err").show();
+                    }
+                    console.log(result);
+                }
+            });
+        })
+    });
+</script>

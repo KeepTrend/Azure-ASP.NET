@@ -1,0 +1,44 @@
+{
+  "name": "rater-js",
+  "description": "Star rating widget for the browser.",
+  "version": "0.5.8",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fredolss/rater-js.git"
+  },
+  "homepage": "https://fredolss.github.io/rater-js",
+  "types": "index.d.ts",
+  "main": "index.js",
+  "scripts": {
+    "build": "browserify -t [ browserify-css --inlineImages]  -t  [babelify --presets [ @babel/preset-env] ]  ./lib/rater-js -o index.js --standalone rater-js",
+    "test": "mocha --require ignore-styles"
+  },
+  "keywords": [
+    "star",
+    "rating",
+    "rater",
+    "vote",
+    "rate",
+    "widget",
+    "browser",
+    "browserify",
+    "typescript"
+  ],
+  "author": {
+    "name": "Fredrik Olsson",
+    "email": "fredrik.olsson2@outlook.com",
+    "url": "https://github.com/fredolss"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.47",
+    "@babel/preset-env": "^7.0.0-beta.47",
+    "babelify": "^9.0.0",
+    "browserify": "^16.1.1",
+    "browserify-css": "^0.14.0",
+    "ignore-styles": "^5.0.1",
+    "jsdom": "^11.6.2",
+    "mocha": "^5.0.5",
+    "sinon": "^4.5.0"
+  }
+}

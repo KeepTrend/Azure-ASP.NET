@@ -1,0 +1,136 @@
+﻿
+@{
+    ViewBag.Title = "buyTransPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/green.css")
+@Styles.Render("~/Content/userpage.css")
+<link rel="stylesheet" type="text/css" href="~/Content/login.css">
+<section id="">
+    <div class="content margin-bottom60">
+        <div class="container">
+            <div class="row m-t-150">
+                <div id="sidebar" class="sidebar  col-sm-3 col-md-3 col-lg-3">
+                    <div class="">
+                        <h3 class="text-green font-weight-bold">BTCUSD</h3>
+                        <h3 class="text-white" id="currentPrice">@Session["currentPrice"]</h3>
+                        <h4 class="text-white">price now</h4>
+                    </div>
+                </div>
+                <!-- Left Section -->
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    <div class="col-sm-10 p-l-80 col-md-10 col-lg-10">
+                        <h4 class="text-white dis-inline">You are about to recieve</h4>
+                        <h4 class="text-green dis-inline">@ViewData["btc_amount"].ToString() BTC</h4>
+                        <h4 class="text-white dis-inline">from user</h4>
+                        <h4 class="text-green dis-inline">@ViewData["sellerName"].ToString().</h4>
+                        <h4 class="text-white dis-inline">We are holding them for you.</h4>
+                        <h4 class="text-white dis-inline-block">We need your wallet ID to send you the</h4>
+                        <h4 class="text-green dis-inline">BTC</h4>
+                    </div>
+                    <div class="col-sm-10 p-l-80 m-t-50 col-md-10 col-lg-10 row">
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="wrap-input100 validate-input m-b-16" data-validate="WalletID is required">
+                                <input class="input100" placeholder="wallet ID" name="walletID" id="walletID" value="@ViewData["walletID"]" style="height:40px" />
+                                <span class="focus-input100"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="row">
+                                <button class="btn login100-form-btn btn-signup" id="saveWallet">
+                                    SAVE
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-10 p-l-80 col-md-10 col-lg-10">
+                        <h4 class="text-white">We are waiting wire instructions from user @ViewData["sellerName"].ToString(). You will be receiving them in your email as soon as we have them</h4>
+                    </div>
+                    <div class="col-sm-10 p-l-80 col-md-10 col-lg-10">
+                            <div class="col-12 m-t-10 text-center">
+                                <h2 class="text-white" id="remainTime">3:00:00</h2>
+                            </div>
+                            <div class="col-12 m-t-5 text-center">
+                                <h5 class="text-white">TIME  REMAINING</h5>
+                            </div>
+                    </div>
+                    <div class="col-sm-10 p-l-80 m-t-50 col-md-10 col-lg-10">
+                        <p class="text-white" id="instruction1">
+                            We will hold this amount for still 3 more hours, untill @ViewData["sellerName"].ToString() sends you wire instructions and eventualy receipt of your wire.
+                        </p>
+                        <p class="text-white" id="instruction2" style="display:none">
+                            We have alrady sent in your email the wire instructions of @ViewData["sellerName"].ToString(). As soon as you execute this wire please don't forget to click " I have sent $@ViewData["cash"].ToString() .
+                        </p>
+                    </div>
+                    <div class="col-sm-10 p-l-80 m-t-50 col-md-10 col-lg-10 row">
+                        <div class="col-sm-6 col-md-6 col-lg-6 mx-auto" id="sentBtn" style="display:none">
+                            @Html.ActionLink("I HAVE SENT THE WIRE", "sentWire", "Contract",new{ transID = ViewData["transID"].ToString()},  htmlAttributes: new { @class = "btn login100-form-btn btn-signup" })
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6 mx-auto">
+                            <button class="btn login100-form-btn btn-signup">
+                                CANCEL TRANSACTION
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Main Content -->
+</section>
+
+
+<script>
+    $(document).ready(function () {
+        $("#saveWallet").click(function () {
+            if ($("#walletID").val() == "") {
+                alert("Please type your walletID.");
+                return;
+            }
+            $.ajax({
+                url: "@Url.Action("saveWalletID", "Contract")",
+                method: "post",
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    walletID: $("#walletID").val()
+                }),
+                success: function (result) {
+                    if (result == "success") {
+                        alert("Your wallet address have been saved");
+                    } else {
+                        alert("Your address is not valid. Please type correct address.");
+                    }
+                }
+            });
+        });
+        var timer = setInterval(function () {
+            $.ajax({
+                url: "@Url.Action("isBTCHolded", "Contract")",
+                method: "post",
+                contentType: 'application/json',
+                success: function (result) {
+                    if (result=="success") {
+                        clearInterval(timer);
+                        $("#instruction1").hide();
+                        $("#instruction2").show();
+                        $("#sentBtn").show();
+                    }
+                }
+            });
+        }, 2000);
+        var remainTime = 3 * 60 * 60 - Math.floor(@ViewData["buyTime"]);
+        console.log(remainTime);
+        var buytimer = setInterval(function () {
+            if (remainTime <= 0) {
+                clearInterval(buytimer);
+                remainTime = 0;
+            }
+            var hour = Math.floor(remainTime / 3600);
+            var minute = Math.floor((remainTime % 3600) / 60);
+            var second = remainTime % 60;
+            var str = hour + ":" + (minute < 10 ? "0" : "") + minute + ":" + (second < 10 ? "0" : "") + second;
+            remainTime--;
+            $("#remainTime").html(str);
+        },1000)
+    });
+</script>

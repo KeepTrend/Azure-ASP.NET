@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "LoginLayout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/login.css">
+
+<div class="limiter">
+    <div class="container-login100 m-t-50">
+        <div class="wrap-login100 p-t-50 p-b-90">
+            <div class="container body-content">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+

@@ -1,0 +1,174 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Exchange.AzureModel.user_table[]users = (Exchange.AzureModel.user_table[])ViewData["users"];
+}
+
+@Styles.Render("~/Content/table.css")
+
+<script src='~/vendor/basictable-master/jquery.basictable.js'></script>
+<script src="~/vendor/jquery/jquery.min.js"></script>
+<script src="~/vendor/country-select-js-master/build/js/countrySelect.min.js"></script>
+<header class="masthead text-white m-t-100">
+    <div class="mx-auto" style="padding-left:25%">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="">The cheapest way to buy Bitcoins</h2>
+                <h2 class=" dis-inline">from people like you,</h2>
+                <h2 class="text-red dis-inline">in your city,</h2>
+                <h2 class=" dis-inline">instantly</h2>
+            </div>
+            <div class="col-lg-8 m-t-50">
+                <h6 class="text-uppercase">
+                    WE ARE DOING STATE OF THE ART KYC, ESCROW TO SECURE TRANSACTION,
+                </h6>
+                <h6 class="text-uppercase">
+                    WHILE KEEPING YOU ALL ANONYMOUS
+                </h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 p-t-30 p-b-30 text-white">
+                @using (Html.BeginForm("secure_trans", "Home", FormMethod.Post, new { role = "form", id = "secure_trans" }))
+                {
+                    <div class="dis-inline">
+                        <div class="dis-inline-block m-t-5">
+                            <h3 class="dis-inline m-t-5">I need </h3>
+                            <input class="m-l-8 m-r-8 dis-inline fs-20 homeInput" placeholder="amount" type="text" name="amount" id="amount" />
+                            <div class="dropdown">
+                                <h3 class="text-green m-r-10 dis-inline font-weight-bold dropbtn">BTC</h3>
+                                <div class="dropdown-content">
+                                    <a onclick="setUnit('BTC')"><h3 class="text-green m-r-10 dis-inline font-weight-bold">BTC</h3></a>
+                                    <a onclick="setUnit('USD')"><h3 class="text-green m-r-10 dis-inline font-weight-bold">USD</h3></a>
+                                </div>
+                            </div>
+                            <input class="dis-none" placeholder="unit" type="text" name="unit" id="unit" value="BTC"/>
+                        </div>
+                        <div class="dis-inline-block m-t-5">
+                            <h3 class="dis-inline">from</h3>
+                            <input class="m-l-8 dis-inline fs-20 homeInput" placeholder="username/email" type="text" name="name_email" id="name_email" style="width:250px" />
+                        </div>
+                    </div>
+                    <div class="m-t-80" style="margin-left:10%">
+                        <button type="submit" class="homebtn btn-info bg-green text-white" id="secure_btn">Get Started</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</header>
+<div class="table-users mx-auto">
+    <table cellspacing="0" id="tb_users" class="mx-auto">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>USER</th>
+                <th>
+                    <input type="text" id="country" />
+                    <input type="hidden" id="country_code" />
+                </th>
+                <th>PAYMENT METHOD</th>
+                <th>COMISSION</th>
+                <th>TRADE SIZE</th>
+                <th>AVG SPEED</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (users != null)
+            {
+                for (var i = 0; i < users.Length; i++)
+                {
+                    <tr class="country_@users[i].country country_name" style="cursor:pointer">
+                        <td onclick="gotoUser('@users[i].username')"><img src="~/images/3.png" alt="" /></td>
+                        <td id="user_@i" data-label="USER" onclick="gotoUser('@users[i].username')">@users[i].username</td>
+                        @if (users[i].country == "gb")
+                        {
+                            <td data-label="COUNTRY" onclick="gotoUser('@users[i].username')">
+                                <img src="https://www.countryflags.io/gb/flat/64.png" alt="" class="dis-inline" />
+                                <p class="dis-inline">UK , @users[i].city</p>
+                            </td>
+                        }
+                        else
+                        {
+                            <td data-label="COUNTRY" onclick="gotoUser('@users[i].username')">
+                                <img src="https://www.countryflags.io/@users[i].country/flat/64.png" alt="" class="dis-inline" />
+                                <p class="dis-inline">@users[i].country.ToUpper() , @users[i].city</p>
+                            </td>
+                        }
+
+                        <td data-label="PAYMENT METHOD" onclick="gotoUser('@users[i].username')"><p>Cash/SEPA IBAN</p></td>
+                        <td data-label="COMISSION" onclick="gotoUser('@users[i].username')"><p>@users[i].btc_cash_com%</p></td>
+                        <td data-label="TRADE SIZE" onclick="gotoUser('@users[i].username')"><p>$@users[i].from_cash-$@users[i].to_cash</p></td>
+                        <td data-label="AVG SPEED" onclick="gotoUser('@users[i].username')"><p>4hr</p></td>
+                        <td>
+                            <button class="homebtn btn-info bg-green" onclick="onSelect('@users[i].username')">Select</button>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+  
+<script>
+    $(document).ready(function () {
+        $("#country").countrySelect();
+        $("#country").countrySelect("selectCountry", "gb");
+        $(".country_name").hide();
+        $(".country_gb").show();
+        $("#country").on("change", function () {
+            var countryData = $("#country").countrySelect("getSelectedCountryData");
+            $(".country_name").hide();
+            $(".country_" + countryData.iso2).show();
+        });
+        $("#secure_trans").submit(function (e) {
+            e.preventDefault();
+            var countryData = $("#country").countrySelect("getSelectedCountryData");
+            var showed_users = $(".country_" + countryData.iso2);
+            if ($("#name_email").val() == "" && showed_users.length > 0) {
+                $("#name_email").val(showed_users[0].childNodes[3].innerHTML);
+            }
+            if ($("#amount").val() == "" || $("#cash").val() == "" || $("#cash").val() == "NaN" || $("#name_email").val() == "") {
+                return;
+            }
+
+            $("#secure_btn").attr("disabled", "disabled");
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: new FormData(this),
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    var res = JSON.parse(data);
+                    $("#secure_btn").removeAttr("disabled");
+                    if (res.state) {
+                        location.href = "/Verify/phoneVerify"
+                    } else {
+                        alert(res.message);
+                    }
+                }
+            });
+        });
+        $(".dropbtn").hover(function () {
+            $(".dropdown-content").show();
+        });
+        $(".dropdown").mouseleave(function () {
+            $(".dropdown-content").hide();
+        });
+    });
+    function onSelect(username) {
+        $("#name_email").val(username);
+    }
+    function setUnit(text) {
+        $(".dropbtn").html(text);
+        $(".dropdown-content").hide();
+        $("#unit").val(text);
+        console.log($("#unit").val());
+    }
+    function gotoUser(username) {
+        location.href = "/Home/user_info?username=" + username;
+    }
+</script>

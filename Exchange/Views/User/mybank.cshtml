@@ -1,0 +1,62 @@
+﻿@model Exchange.AzureModel.user_table
+@{
+    ViewBag.Title = "mybank";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<div class="col-8 mx-auto m-t-150">
+    @using (Html.BeginForm("saveBank", "User", FormMethod.Post, new { @class = "login100-form validate-form", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-lg-4 text-right">
+                <h4 class="text-white m-t-5">BENEFICIARY</h4>
+            </div>
+            <div class="col-lg-8">
+                <div class="wrap-input100 validate-input m-b-16" data-validate="Beneficiery is required">
+                    @Html.EditorFor(model => model.beneficiery, new { htmlAttributes = new { @class = "input100" ,style="height:40px"} })
+                    <span class="focus-input100"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 text-right">
+                <h4 class="text-white m-t-5">BANK NAME</h4>
+            </div>
+            <div class="col-lg-8">
+                <div class="wrap-input100 validate-input m-b-16" data-validate="Bank name is required">
+                    @Html.EditorFor(model => model.bank, new { htmlAttributes = new { @class = "input100", style = "height:40px" } })
+                    <span class="focus-input100"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 text-right">
+                <h4 class="text-white m-t-5">IBAN</h4>
+            </div>
+            <div class="col-lg-8">
+                <div class="wrap-input100 validate-input m-b-16" data-validate="IBAN is required">
+                    @Html.EditorFor(model => model.IBAN, new { htmlAttributes = new { @class = "input100", style = "height:40px" } })
+                    <span class="focus-input100"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 text-right">
+                <h4 class="text-white m-t-5">SWIFT</h4>
+            </div>
+            <div class="col-lg-8">
+                <div class="wrap-input100 validate-input m-b-16" data-validate="SWIFT is required">
+                    @Html.EditorFor(model => model.SWIFT, new { htmlAttributes = new { @class = "input100", style = "height:40px" } })
+                    <span class="focus-input100"></span>
+                </div>
+            </div>
+        </div>
+        <div class="container-login100-form-btn m-t-17 w-75 mx-auto">
+            <button class="btn login100-form-btn btn-signup">
+                SAVE
+            </button>
+        </div>
+    }
+</div>

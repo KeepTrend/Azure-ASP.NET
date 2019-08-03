@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="exchange_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="shufti_log">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="time" Type="DateTime" Precision="3" />
+    <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="declined_reason" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="birthday" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="document_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="expiry_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="issue_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="trans_history">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="buyer" Type="Int32" />
+    <Property Name="seller" Type="Int32" />
+    <Property Name="btc" Type="Double" />
+    <Property Name="cash" Type="Double" />
+    <Property Name="holdBTC" Type="Boolean" />
+    <Property Name="sentBTC" Type="Boolean" />
+    <Property Name="sentCash" Type="Boolean" />
+    <Property Name="recieveCash" Type="Boolean" />
+    <Property Name="holdTransID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sentTransID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="holdWallet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="buyerWallet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="firstname_seller" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="lastname_seller" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IBAN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SWIFT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="REFERENCE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sellTime" Type="DateTime" Precision="3" />
+    <Property Name="buyTime" Type="DateTime" Precision="3" />
+    <Property Name="holdAmount" Type="Double" />
+    <NavigationProperty Name="user_buyer" Relationship="Self.FK_user_buyer" FromRole="trans_history" ToRole="user_table" />
+    <NavigationProperty Name="user_seller" Relationship="Self.FK_user_seller" FromRole="trans_history" ToRole="user_table" />
+  </EntityType>
+  <EntityType Name="user_table">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="emailVerified" Type="Boolean" />
+    <Property Name="emailCode" Type="Guid" />
+    <Property Name="IBAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SWIFT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="signup" Type="DateTime" Precision="0" />
+    <Property Name="listme" Type="Boolean" />
+    <Property Name="qrkey" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="phoneVerified" Type="Boolean" />
+    <Property Name="kycVerified" Type="Boolean" />
+    <Property Name="birthday" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="beneficiery" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bank" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="check_btc" Type="Boolean" />
+    <Property Name="check_eth" Type="Boolean" />
+    <Property Name="btc_cash" Type="Boolean" />
+    <Property Name="eth_cash" Type="Boolean" />
+    <Property Name="btc_cash_com" Type="Double" />
+    <Property Name="eth_cash_com" Type="Double" />
+    <Property Name="btc_wire" Type="Boolean" />
+    <Property Name="eth_wire" Type="Boolean" />
+    <Property Name="btc_wire_com" Type="Double" />
+    <Property Name="eth_wire_com" Type="Double" />
+    <Property Name="from_cash" Type="Double" />
+    <Property Name="to_cash" Type="Double" />
+    <NavigationProperty Name="trans_history" Relationship="Self.FK_user_buyer" FromRole="user_table" ToRole="trans_history" />
+    <NavigationProperty Name="trans_history1" Relationship="Self.FK_user_seller" FromRole="user_table" ToRole="trans_history" />
+    <Property Name="qrScanned" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK_user_buyer">
+    <End Role="user_table" Type="Self.user_table" Multiplicity="0..1" />
+    <End Role="trans_history" Type="Self.trans_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_table">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="trans_history">
+        <PropertyRef Name="buyer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_seller">
+    <End Role="user_table" Type="Self.user_table" Multiplicity="0..1" />
+    <End Role="trans_history" Type="Self.trans_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_table">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="trans_history">
+        <PropertyRef Name="seller" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AzureConnection" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="shufti_log" EntityType="Self.shufti_log" />
+    <EntitySet Name="trans_history" EntityType="Self.trans_history" />
+    <EntitySet Name="user_table" EntityType="Self.user_table" />
+    <AssociationSet Name="FK_user_buyer" Association="Self.FK_user_buyer">
+      <End Role="user_table" EntitySet="user_table" />
+      <End Role="trans_history" EntitySet="trans_history" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_seller" Association="Self.FK_user_seller">
+      <End Role="user_table" EntitySet="user_table" />
+      <End Role="trans_history" EntitySet="trans_history" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

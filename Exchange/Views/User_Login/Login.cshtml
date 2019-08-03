@@ -1,0 +1,44 @@
+﻿@model Exchange.AzureModel.UserLoginPage
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/LoginLayout.cshtml";
+}
+@if (@ViewBag.Message != null)
+{
+    <div class="alert alert-danger">
+        <strong>Error!</strong>
+        <p>@ViewBag.Message</p>
+    </div>
+}
+@using (Html.BeginForm("Login", "User_Login", FormMethod.Post, new { @class = "login100-form validate-form flex-sb flex-w", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <span class="login100-form-title p-b-51">
+        Login
+    </span>
+    <div class="wrap-input100 validate-input m-b-16" data-validate="Username is required">
+        
+        @Html.EditorFor(model => model.EmailID, new { htmlAttributes = new { @class = "input100", @placeholder = "Email", @name = "EmailID" } })
+        <span class="focus-input100"></span>
+    </div>
+
+
+    <div class="wrap-input100 validate-input m-b-16" data-validate="Password is required">
+        @Html.PasswordFor(model => model.Password, new { @class = "input100", @placeholder = "Password", @name = "Password" })
+        
+        <span class="focus-input100"></span>
+    </div>
+
+    <div class="flex-sb-m w-full p-t-3 p-b-24">
+        <div class="text-light">
+            @Html.ActionLink("New account?", "getStarted", "User_Login", null,htmlAttributes: new { @class = "txt1" })
+        </div>
+    </div>
+
+    <div class="container-login100-form-btn m-t-17">
+        <button class="btn login100-form-btn btn-login">
+            Login
+        </button>
+    </div>
+}
+

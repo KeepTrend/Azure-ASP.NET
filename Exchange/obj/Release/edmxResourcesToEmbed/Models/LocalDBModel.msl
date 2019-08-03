@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LocalDBModelStoreContainer" CdmEntityContainer="LocalConnection">
+    <EntitySetMapping Name="trans_history">
+      <EntityTypeMapping TypeName="LocalDBModel.trans_history">
+        <MappingFragment StoreEntitySet="trans_history">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="buyer" ColumnName="buyer" />
+          <ScalarProperty Name="seller" ColumnName="seller" />
+          <ScalarProperty Name="btc" ColumnName="btc" />
+          <ScalarProperty Name="cash" ColumnName="cash" />
+          <ScalarProperty Name="holdBTC" ColumnName="holdBTC" />
+          <ScalarProperty Name="sentBTC" ColumnName="sentBTC" />
+          <ScalarProperty Name="sentCash" ColumnName="sentCash" />
+          <ScalarProperty Name="recieveCash" ColumnName="recieveCash" />
+          <ScalarProperty Name="holdTransID" ColumnName="holdTransID" />
+          <ScalarProperty Name="sentTransID" ColumnName="sentTransID" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="holdWallet" ColumnName="holdWallet" />
+          <ScalarProperty Name="buyerWallet" ColumnName="buyerWallet" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_table">
+      <EntityTypeMapping TypeName="LocalDBModel.user_table">
+        <MappingFragment StoreEntitySet="user_table">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="emailVerified" ColumnName="emailVerified" />
+          <ScalarProperty Name="emailCode" ColumnName="emailCode" />
+          <ScalarProperty Name="IBAN" ColumnName="IBAN" />
+          <ScalarProperty Name="SWIFT" ColumnName="SWIFT" />
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

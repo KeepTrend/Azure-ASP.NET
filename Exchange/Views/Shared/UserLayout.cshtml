@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string[] action_name = { "My listings", "Affiliate links", "Affiliate Transactions", "My Bank Account Details", "Google Authenticator", "Personal Info", "My Transactions" };
+    string[] actions = { "mylistings", "affiliate_links", "affiliate_trans", "mybank", "google_auth", "pers_info", "mytrans" };
+}
+@Styles.Render("~/Content/green.css")
+@Styles.Render("~/Content/userpage.css")
+<link rel="stylesheet" type="text/css" href="~/Content/login.css">
+<section id="">
+    <!-- Main Content -->
+    <div class="content margin-bottom60">
+        <div class="container">
+            <div class="row m-t-150">
+                <div id="sidebar" class="sidebar  col-sm-3 col-md-3 col-lg-3">
+                    <div class="">
+                        <h3 class="text-green font-weight-bold">BTCUSD</h3>
+                        <h3 class="text-white" id="currentPrice"></h3>
+                        <h4 class="text-white">price now</h4>
+                    </div>
+                    <div class="widget m-t-50">
+                        <div id="sidebar-nav">
+                            <ul class="sidebar-nav">
+                                @foreach (var item in actions)
+                                {
+                                    if (item == ViewBag.Action)
+                                    {
+                                        <li class="active">
+                                            <a class="text-white">@action_name[Array.IndexOf(actions, item)]</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            @Html.ActionLink(action_name[Array.IndexOf(actions, item)], item, "User",null,new { @class = "text-white" })
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                        <!-- /menu-->
+                    </div>
+                </div>
+                <!-- Left Section -->
+                <div class="col-sm-9 p-l-50 col-md-9 col-lg-9">
+                    @RenderBody()
+                </div>
+                <!-- /Left Section -->
+                <!-- Sidebar -->
+                <!-- /Sidebar -->
+            </div>
+        </div>
+    </div>
+    <!-- /Main Content -->
+</section>
+
+

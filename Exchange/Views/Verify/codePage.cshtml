@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "codePage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/green.css")
+<section id="">
+    <div class="content margin-bottom60">
+        <div class="container">
+            <div class="row m-t-100">
+                <div id="sidebar" class="sidebar col-3">
+                    <div class="">
+                        <h3 class="text-green font-weight-bold">BTCUSD</h3>
+                        <h3 class="text-white" id="currentPrice"></h3>
+                        <h4 class="text-white">price now</h4>
+                    </div>
+                </div>
+                <!-- Left Section -->
+                <div class="m-t-50 col-9">
+                    <div id="information">
+                        <div class="m-b-30">
+                            <h4 class="text-white">We have sent to you a text message, please type the code below.</h4>
+                        </div>
+                        <div class="p-l-50">
+                            @if (ViewBag.Message != null)
+                            {
+                                <div class="alert alert-danger">
+                                    <strong>Error!</strong>
+                                    <p>@ViewBag.Message</p>
+                                </div>
+                            }
+                            @using (Html.BeginForm("checkPhoneCode", "Verify", FormMethod.Post))
+                            {
+                                <div class="wrap-input100 validate-input m-b-16 p-l-30" data-validate="Phone Number is required">
+                                    <input class="input100" type="text" name="phoneCode" id="phoneCode">
+                                    <span class="focus-input100"></span>
+                                </div>
+                                <div class="m-t-30">
+                                    @Html.ActionLink("BACK", "index", "Home", null, htmlAttributes: new { @class = "text-white m-t-30 fs-10 back-link" })
+                                    <button class="btn login100-form-btn bg-green text-white btn-width" type="submit">
+                                        Verify
+                                    </button>
+                                    <div class="m-t-5 m-l-30 w-100">
+                                        @Html.ActionLink("I haven't recieved any message to my phone please retry", "phoneVerify", "Verify", null, htmlAttributes: new { @class = "text-white m-t-30 fs-10" })
+                                    </div>
+                                </div>                               
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Main Content -->
+</section>

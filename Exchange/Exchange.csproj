@@ -1,0 +1,1016 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BEA18C5C-F456-4AAD-915E-C448D3A924CC}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Exchange</RootNamespace>
+    <AssemblyName>Exchange</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CF.RESTClient.NET.Standard, Version=0.5.0.0, Culture=neutral, PublicKeyToken=1951cf67cf9242e6, processorArchitecture=MSIL">
+      <HintPath>..\packages\RESTClient.NET.0.7.0\lib\portable-net4+sl4+wp7+win8\CF.RESTClient.NET.Standard.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.1.1.1\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=1.1.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.1.1.2\lib\netstandard1.1\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=1.1.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.1.1.2\lib\netstandard1.1\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=1.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.1.1.2\lib\net451\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.1.2\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestClient, Version=2.4.1.9, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestClient.2.4.1.9\lib\net451\RestClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.1.2\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Twilio, Version=5.24.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Twilio.5.24.0\lib\net451\Twilio.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Diagnostics.DiagnosticSource">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net45\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiHelper\BlockApi.cs" />
+    <Compile Include="ApiHelper\KYCApi.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="AzureModel\AzureModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AzureModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AzureModel\AzureModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AzureModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AzureModel\AzureModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AzureModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="AzureModel\shufti_log.cs">
+      <DependentUpon>AzureModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AzureModel\trans_history.cs">
+      <DependentUpon>AzureModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AzureModel\UserLoginPage.cs" />
+    <Compile Include="AzureModel\UserSignupPage.cs" />
+    <Compile Include="AzureModel\user_table.cs">
+      <DependentUpon>AzureModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ContractController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\User_LoginController.cs" />
+    <Compile Include="Controllers\VerifyController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Global\BackgroundJob.cs" />
+    <Compile Include="Global\RealtimeActions.cs" />
+    <Compile Include="Global\Variables.cs" />
+    <Compile Include="Google.Authenticator\SetupCode.cs" />
+    <Compile Include="Google.Authenticator\TwoFactorAuthenticator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AzureModel\AzureModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AzureModel.edmx</DependentUpon>
+      <LastGenOutput>AzureModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="AzureModel\AzureModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AzureModel.edmx</DependentUpon>
+      <LastGenOutput>AzureModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\checkbox.css" />
+    <Content Include="Content\creative.css" />
+    <Content Include="Content\green.css" />
+    <Content Include="Content\home.css" />
+    <Content Include="Content\login.css" />
+    <Content Include="Content\table.css" />
+    <Content Include="Content\userinfo.css" />
+    <Content Include="Content\userpage.css" />
+    <Content Include="Content\util.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.css" />
+    <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\font-awesome-4.7.0\HELP-US-OUT.txt" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\Linearicons-Free-v1.0.0\icon-font.min.css" />
+    <Content Include="fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.svg" />
+    <Content Include="fonts\montserrat\OFL.txt" />
+    <Content Include="fonts\myriadpro\example.html" />
+    <Content Include="fonts\myriadpro\style.css" />
+    <Content Include="fonts\ubuntu\UFL.txt" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="images\3.png" />
+    <Content Include="images\ajax-loader1.gif" />
+    <Content Include="images\ajax-loader2.gif" />
+    <Content Include="images\appstore.png" />
+    <Content Include="images\googleplay.png" />
+    <Content Include="images\icons\favico.png" />
+    <Content Include="images\icons\icon-google.png" />
+    <Content Include="images\icons\map-marker.png" />
+    <Content Include="images\icons\symbol-01.png" />
+    <Content Include="images\open.png" />
+    <Content Include="images\qrcode.jpg" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <Content Include="fonts\font-awesome-4.7.0\less\animated.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\core.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\fixed-width.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\font-awesome.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\icons.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\larger.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\list.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\mixins.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\path.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\screen-reader.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\stacked.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\variables.less" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_animated.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_core.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_icons.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_larger.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_list.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_mixins.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_path.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_stacked.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_variables.scss" />
+    <Content Include="fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.eot" />
+    <Content Include="fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.ttf" />
+    <Content Include="fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.woff" />
+    <Content Include="fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.woff2" />
+    <Content Include="fonts\montserrat\Montserrat-Black.ttf" />
+    <Content Include="fonts\montserrat\Montserrat-BlackItalic.ttf" />
+    <Content Include="fonts\montserrat\Montserrat-Bold.ttf" />
+    <Content Include="fonts\montserrat\Montserrat-BoldItalic.ttf" />
+    <Content Include="fonts\montserrat\Montserrat-ExtraBold.ttf" />
+    <Content Include="fonts\montserrat\Montserrat-ExtraBoldItalic.ttf" />
+    <Content Include="fonts\montserrat\Montserrat-ExtraLight.ttf" />
+    <Content Include="fonts\montserrat\Montserrat-ExtraLightItalic.ttf" />
+    <Content Include="fonts\montserrat\Montserrat-Italic.ttf" />
+    <Content Include="fonts\montserrat\Montserrat-Light.ttf" />
+    <Content Include="fonts\montserrat\Montserrat-LightItalic.ttf" />
+    <Content Include="fonts\montserrat\Montserrat-Medium.ttf" />
+    <Content Include="fonts\montserrat\Montserrat-MediumItalic.ttf" />
+    <Content Include="fonts\montserrat\Montserrat-Regular.ttf" />
+    <Content Include="fonts\montserrat\Montserrat-SemiBold.ttf" />
+    <Content Include="fonts\montserrat\Montserrat-SemiBoldItalic.ttf" />
+    <Content Include="fonts\montserrat\Montserrat-Thin.ttf" />
+    <Content Include="fonts\montserrat\Montserrat-ThinItalic.ttf" />
+    <Content Include="fonts\poppins\Poppins-Black.ttf" />
+    <Content Include="fonts\poppins\Poppins-BlackItalic.ttf" />
+    <Content Include="fonts\poppins\Poppins-Bold.ttf" />
+    <Content Include="fonts\poppins\Poppins-BoldItalic.ttf" />
+    <Content Include="fonts\poppins\Poppins-ExtraBold.ttf" />
+    <Content Include="fonts\poppins\Poppins-ExtraBoldItalic.ttf" />
+    <Content Include="fonts\poppins\Poppins-ExtraLight.ttf" />
+    <Content Include="fonts\poppins\Poppins-ExtraLightItalic.ttf" />
+    <Content Include="fonts\poppins\Poppins-Italic.ttf" />
+    <Content Include="fonts\poppins\Poppins-Light.ttf" />
+    <Content Include="fonts\poppins\Poppins-LightItalic.ttf" />
+    <Content Include="fonts\poppins\Poppins-Medium.ttf" />
+    <Content Include="fonts\poppins\Poppins-MediumItalic.ttf" />
+    <Content Include="fonts\poppins\Poppins-Regular.ttf" />
+    <Content Include="fonts\poppins\Poppins-SemiBold.ttf" />
+    <Content Include="fonts\poppins\Poppins-SemiBoldItalic.ttf" />
+    <Content Include="fonts\poppins\Poppins-Thin.ttf" />
+    <Content Include="fonts\poppins\Poppins-ThinItalic.ttf" />
+    <Content Include="fonts\ubuntu\Ubuntu-Bold.ttf" />
+    <Content Include="fonts\ubuntu\Ubuntu-BoldItalic.ttf" />
+    <Content Include="fonts\ubuntu\Ubuntu-Italic.ttf" />
+    <Content Include="fonts\ubuntu\Ubuntu-Light.ttf" />
+    <Content Include="fonts\ubuntu\Ubuntu-LightItalic.ttf" />
+    <Content Include="fonts\ubuntu\Ubuntu-Medium.ttf" />
+    <Content Include="fonts\ubuntu\Ubuntu-MediumItalic.ttf" />
+    <Content Include="fonts\ubuntu\Ubuntu-Regular.ttf" />
+    <Content Include="fonts\CenturyGothic\Century Gothic.ttf" />
+    <Content Include="fonts\CenturyGothic\CenturyGothic.ttf" />
+    <Content Include="fonts\CenturyGothic\GOTHIC.TTF" />
+    <Content Include="fonts\CenturyGothic\GOTHICB.TTF" />
+    <Content Include="fonts\CenturyGothic\GOTHICB0.TTF" />
+    <Content Include="fonts\CenturyGothic\GOTHICBI.TTF" />
+    <Content Include="fonts\CenturyGothic\GOTHICI.TTF" />
+    <Content Include="fonts\myriadpro\MYRIADPRO-BOLD.woff" />
+    <Content Include="fonts\myriadpro\MYRIADPRO-BOLDCOND.woff" />
+    <Content Include="fonts\myriadpro\MYRIADPRO-BOLDCONDIT.woff" />
+    <Content Include="fonts\myriadpro\MYRIADPRO-BOLDIT.woff" />
+    <Content Include="fonts\myriadpro\MYRIADPRO-COND.woff" />
+    <Content Include="fonts\myriadpro\MYRIADPRO-CONDIT.woff" />
+    <Content Include="fonts\myriadpro\MyriadPro-Light.woff" />
+    <Content Include="fonts\myriadpro\MYRIADPROREGULAR.woff" />
+    <Content Include="fonts\myriadpro\MYRIADPRO-SEMIBOLD.woff" />
+    <Content Include="fonts\myriadpro\MYRIADPRO-SEMIBOLDIT.woff" />
+    <EntityDeploy Include="AzureModel\AzureModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AzureModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="AzureModel\AzureModel.edmx.diagram">
+      <DependentUpon>AzureModel.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\trustbtc - Web Deploy.pubxml" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\Custom\buyTransPage.js" />
+    <Content Include="Scripts\Custom\creative.js" />
+    <Content Include="Scripts\Custom\creative.min.js" />
+    <Content Include="Scripts\Custom\login.js" />
+    <Content Include="Scripts\Custom\sellTransPage.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.qrcode.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="vendor\animate\animate.css" />
+    <Content Include="vendor\animsition\css\animsition.css" />
+    <Content Include="vendor\animsition\css\animsition.min.css" />
+    <Content Include="vendor\animsition\js\animsition.js" />
+    <Content Include="vendor\animsition\js\animsition.min.js" />
+    <Content Include="vendor\basictable-master\basictable.css" />
+    <Content Include="vendor\basictable-master\demo\css\style.css" />
+    <Content Include="vendor\basictable-master\demo\index.html" />
+    <Content Include="vendor\basictable-master\jquery.basictable.js" />
+    <Content Include="vendor\basictable-master\jquery.basictable.min.js" />
+    <Content Include="vendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="vendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="vendor\bootstrap\js\popper.js" />
+    <Content Include="vendor\bootstrap\js\popper.min.js" />
+    <Content Include="vendor\bootstrap\js\tooltip.js" />
+    <Content Include="vendor\countdowntime\countdowntime.js" />
+    <Content Include="vendor\country-select-js-master\.gitignore" />
+    <Content Include="vendor\country-select-js-master\build\css\countrySelect.css" />
+    <Content Include="vendor\country-select-js-master\build\css\countrySelect.min.css" />
+    <Content Include="vendor\country-select-js-master\build\css\demo.css" />
+    <Content Include="vendor\country-select-js-master\build\img\flags%402x.png" />
+    <Content Include="vendor\country-select-js-master\build\img\flags.png" />
+    <Content Include="vendor\country-select-js-master\build\js\countrySelect.js" />
+    <Content Include="vendor\country-select-js-master\build\js\countrySelect.min.js" />
+    <Content Include="vendor\country-select-js-master\demo.html" />
+    <Content Include="vendor\country-select-js-master\gulpfile.js" />
+    <Content Include="vendor\country-select-js-master\screenshot.png" />
+    <Content Include="vendor\country-select-js-master\src\js\countrySelect.js" />
+    <Content Include="vendor\css-hamburgers\hamburgers.css" />
+    <Content Include="vendor\css-hamburgers\hamburgers.min.css" />
+    <Content Include="vendor\daterangepicker\daterangepicker.css" />
+    <Content Include="vendor\daterangepicker\daterangepicker.js" />
+    <Content Include="vendor\daterangepicker\moment.js" />
+    <Content Include="vendor\daterangepicker\moment.min.js" />
+    <Content Include="vendor\iban.js\.gitignore" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\dist\css\bootstrap-theme.css" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\dist\css\bootstrap-theme.min.css" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\dist\js\npm.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\Gruntfile.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\grunt\bs-commonjs-generator.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\grunt\bs-glyphicons-data-generator.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\grunt\bs-lessdoc-parser.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\grunt\bs-raw-files-generator.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\grunt\change-version.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\js\affix.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\js\alert.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\js\button.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\js\carousel.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\js\collapse.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\js\dropdown.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\js\modal.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\js\popover.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\js\scrollspy.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\js\tab.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\js\tooltip.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\js\transition.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\package.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\chai\chai.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\chai\karma.conf.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\chai\karma.sauce.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\chai\sauce.browsers.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\iban\iban.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\AUTHORS.txt" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\dist\core.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\dist\jquery.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\dist\jquery.min.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\dist\jquery.slim.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\dist\jquery.slim.min.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\external\sizzle\dist\sizzle.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\external\sizzle\dist\sizzle.min.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\external\sizzle\LICENSE.txt" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\LICENSE.txt" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\ajax.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\ajax\jsonp.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\ajax\load.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\ajax\parseXML.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\ajax\script.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\ajax\var\location.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\ajax\var\nonce.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\ajax\var\rquery.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\ajax\xhr.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\attributes.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\attributes\attr.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\attributes\classes.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\attributes\prop.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\attributes\support.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\attributes\val.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\callbacks.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\core.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\core\access.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\core\DOMEval.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\core\init.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\core\nodeName.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\core\parseHTML.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\core\ready-no-deferred.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\core\ready.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\core\readyException.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\core\stripAndCollapse.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\core\support.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\core\var\rsingleTag.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\css.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\css\addGetHookIf.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\css\adjustCSS.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\css\curCSS.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\css\hiddenVisibleSelectors.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\css\showHide.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\css\support.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\css\var\cssExpand.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\css\var\getStyles.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\css\var\isHiddenWithinTree.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\css\var\rmargin.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\css\var\rnumnonpx.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\css\var\swap.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\data.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\data\Data.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\data\var\acceptData.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\data\var\dataPriv.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\data\var\dataUser.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\deferred.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\deferred\exceptionHook.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\deprecated.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\dimensions.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\effects.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\effects\animatedSelector.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\effects\Tween.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\event.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\event\ajax.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\event\alias.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\event\focusin.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\event\support.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\event\trigger.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\exports\amd.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\exports\global.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\jquery.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\manipulation.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\manipulation\buildFragment.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\manipulation\getAll.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\manipulation\setGlobalEval.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\manipulation\support.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\manipulation\var\rcheckableType.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\manipulation\var\rscriptType.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\manipulation\var\rtagName.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\manipulation\wrapMap.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\manipulation\_evalUrl.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\offset.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\queue.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\queue\delay.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\selector-native.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\selector-sizzle.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\selector.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\serialize.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\traversing.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\traversing\findFilter.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\traversing\var\dir.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\traversing\var\rneedsContext.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\traversing\var\siblings.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\var\arr.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\var\class2type.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\var\concat.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\var\document.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\var\documentElement.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\var\fnToString.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\var\getProto.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\var\hasOwn.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\var\indexOf.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\var\ObjectFunctionString.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\var\pnum.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\var\push.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\var\rcssNum.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\var\rnothtmlwhite.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\var\slice.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\var\support.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\var\toString.js" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\wrap.js" />
+    <Content Include="vendor\iban.js\demo\css\ie10-viewport-bug-workaround.css" />
+    <Content Include="vendor\iban.js\demo\css\jumbotron-narrow.css" />
+    <Content Include="vendor\iban.js\demo\index.html" />
+    <Content Include="vendor\iban.js\demo\js\countries.js" />
+    <Content Include="vendor\iban.js\demo\js\demo.js" />
+    <Content Include="vendor\iban.js\demo\js\ie-emulation-modes-warning.js" />
+    <Content Include="vendor\iban.js\demo\js\ie10-viewport-bug-workaround.js" />
+    <Content Include="vendor\iban.js\iban.js" />
+    <Content Include="vendor\iban.js\test\ibanTest.js" />
+    <Content Include="vendor\iban.js\test\simple.html" />
+    <Content Include="vendor\iban.js\test\tests.html" />
+    <Content Include="vendor\intl-tel-input\.gitignore" />
+    <Content Include="vendor\intl-tel-input\.grenrc.js" />
+    <Content Include="vendor\intl-tel-input\build\css\demo.css" />
+    <Content Include="vendor\intl-tel-input\build\css\intlTelInput.css" />
+    <Content Include="vendor\intl-tel-input\build\css\intlTelInput.min.css" />
+    <Content Include="vendor\intl-tel-input\build\img\flags%402x.png" />
+    <Content Include="vendor\intl-tel-input\build\img\flags.png" />
+    <Content Include="vendor\intl-tel-input\build\js\intlTelInput-jquery.js" />
+    <Content Include="vendor\intl-tel-input\build\js\intlTelInput-jquery.min.js" />
+    <Content Include="vendor\intl-tel-input\build\js\intlTelInput.js" />
+    <Content Include="vendor\intl-tel-input\build\js\intlTelInput.min.js" />
+    <Content Include="vendor\intl-tel-input\build\js\utils.js" />
+    <Content Include="vendor\intl-tel-input\demo.html" />
+    <Content Include="vendor\intl-tel-input\examples\css\countrySync.css" />
+    <Content Include="vendor\intl-tel-input\examples\css\isValidNumber.css" />
+    <Content Include="vendor\intl-tel-input\examples\css\prism.css" />
+    <Content Include="vendor\intl-tel-input\examples\gen\country-sync.html" />
+    <Content Include="vendor\intl-tel-input\examples\gen\default-country-ip.html" />
+    <Content Include="vendor\intl-tel-input\examples\gen\display-number.html" />
+    <Content Include="vendor\intl-tel-input\examples\gen\hidden-input.html" />
+    <Content Include="vendor\intl-tel-input\examples\gen\init-promise.html" />
+    <Content Include="vendor\intl-tel-input\examples\gen\is-valid-number.html" />
+    <Content Include="vendor\intl-tel-input\examples\gen\js\countrySync.js" />
+    <Content Include="vendor\intl-tel-input\examples\gen\js\defaultCountryIp.js" />
+    <Content Include="vendor\intl-tel-input\examples\gen\js\displayNumber.js" />
+    <Content Include="vendor\intl-tel-input\examples\gen\js\hiddenInput.js" />
+    <Content Include="vendor\intl-tel-input\examples\gen\js\initPromise.js" />
+    <Content Include="vendor\intl-tel-input\examples\gen\js\isValidNumber.js" />
+    <Content Include="vendor\intl-tel-input\examples\gen\js\modifyCountryData.js" />
+    <Content Include="vendor\intl-tel-input\examples\gen\js\multipleInstances.js" />
+    <Content Include="vendor\intl-tel-input\examples\gen\js\nationalMode.js" />
+    <Content Include="vendor\intl-tel-input\examples\gen\js\onlyCountriesEurope.js" />
+    <Content Include="vendor\intl-tel-input\examples\gen\modify-country-data.html" />
+    <Content Include="vendor\intl-tel-input\examples\gen\multiple-instances.html" />
+    <Content Include="vendor\intl-tel-input\examples\gen\national-mode.html" />
+    <Content Include="vendor\intl-tel-input\examples\gen\only-countries-europe.html" />
+    <Content Include="vendor\intl-tel-input\examples\js\prism.js" />
+    <Content Include="vendor\intl-tel-input\examples\partials\countrySync.html" />
+    <Content Include="vendor\intl-tel-input\examples\partials\defaultCountryIp.html" />
+    <Content Include="vendor\intl-tel-input\examples\partials\displayNumber.html" />
+    <Content Include="vendor\intl-tel-input\examples\partials\hiddenInput.html" />
+    <Content Include="vendor\intl-tel-input\examples\partials\initPromise.html" />
+    <Content Include="vendor\intl-tel-input\examples\partials\isValidNumber.html" />
+    <Content Include="vendor\intl-tel-input\examples\partials\multipleInstances.html" />
+    <Content Include="vendor\intl-tel-input\examples\partials\nationalMode.html" />
+    <Content Include="vendor\intl-tel-input\examples\partials\simpleInput.html" />
+    <Content Include="vendor\intl-tel-input\Gruntfile.js" />
+    <Content Include="vendor\intl-tel-input\grunt\babel.js" />
+    <Content Include="vendor\intl-tel-input\grunt\bump.js" />
+    <Content Include="vendor\intl-tel-input\grunt\concat.js" />
+    <Content Include="vendor\intl-tel-input\grunt\cssmin.js" />
+    <Content Include="vendor\intl-tel-input\grunt\eslint.js" />
+    <Content Include="vendor\intl-tel-input\grunt\exec.js" />
+    <Content Include="vendor\intl-tel-input\grunt\imagemin.js" />
+    <Content Include="vendor\intl-tel-input\grunt\jasmine.js" />
+    <Content Include="vendor\intl-tel-input\grunt\replace.js" />
+    <Content Include="vendor\intl-tel-input\grunt\responsive_images.js" />
+    <Content Include="vendor\intl-tel-input\grunt\retinafy.js" />
+    <Content Include="vendor\intl-tel-input\grunt\sass.js" />
+    <Content Include="vendor\intl-tel-input\grunt\shell.js" />
+    <Content Include="vendor\intl-tel-input\grunt\sprite.js" />
+    <Content Include="vendor\intl-tel-input\grunt\template.js" />
+    <Content Include="vendor\intl-tel-input\grunt\uglify.js" />
+    <Content Include="vendor\intl-tel-input\grunt\watch.js" />
+    <Content Include="vendor\intl-tel-input\index.js" />
+    <Content Include="vendor\intl-tel-input\screenshots\separateDialCode.png" />
+    <Content Include="vendor\intl-tel-input\screenshots\vanilla.png" />
+    <Content Include="vendor\intl-tel-input\spec.html" />
+    <Content Include="vendor\intl-tel-input\src\js\data.js" />
+    <Content Include="vendor\intl-tel-input\src\js\intlTelInput.js" />
+    <Content Include="vendor\intl-tel-input\src\js\intro-jquery.js" />
+    <Content Include="vendor\intl-tel-input\src\js\intro.js" />
+    <Content Include="vendor\intl-tel-input\src\js\outro-jquery.js" />
+    <Content Include="vendor\intl-tel-input\src\js\outro.js" />
+    <Content Include="vendor\intl-tel-input\src\js\utils.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\helpers\helpers.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\core\closecountrydropdownEvent.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\core\countrychangeEvent.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\core\dropdownShortcuts.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\core\initialValues.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\core\multipleInstances.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\core\usingDropdown.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\core\usingInput.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\methods\destroy.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\methods\getExtension.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\methods\getNumber.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\methods\getNumberType.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\methods\getSelectedCountryData.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\methods\getValidationError.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\methods\isValidNumber.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\methods\setCountry.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\methods\setNumber.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\methods\setPlaceholderNumberType.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\options\allowDropdown.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\options\autoHideDialCode.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\options\autoPlaceholder.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\options\customPlaceholder.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\options\dropdownContainer.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\options\excludeCountries.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\options\formatOnDisplay.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\options\geoIpLookup.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\options\initialCountry.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\options\nationalMode.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\options\onlyCountries.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\options\placeholderNumberType.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\options\preferredCountries.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\options\separateDialCode.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\options\utilsScript.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\static\defaults.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\static\getCountryData.js" />
+    <Content Include="vendor\intl-tel-input\src\spec\tests\static\loadUtils.js" />
+    <Content Include="vendor\jquery\jquery-3.2.1.min.js" />
+    <Content Include="vendor\jquery\jquery.js" />
+    <Content Include="vendor\jquery\jquery.min.js" />
+    <Content Include="vendor\jquery\jquery.slim.js" />
+    <Content Include="vendor\jquery\jquery.slim.min.js" />
+    <Content Include="vendor\magnific-popup\jquery.magnific-popup.js" />
+    <Content Include="vendor\magnific-popup\jquery.magnific-popup.min.js" />
+    <Content Include="vendor\magnific-popup\magnific-popup.css" />
+    <Content Include="vendor\perfect-scrollbar\perfect-scrollbar.css" />
+    <Content Include="vendor\perfect-scrollbar\perfect-scrollbar.min.js" />
+    <Content Include="vendor\rater-js-master\example\index.html" />
+    <Content Include="vendor\rater-js-master\example\index.js" />
+    <Content Include="vendor\rater-js-master\index.js" />
+    <Content Include="vendor\rater-js-master\lib\rater-js.js" />
+    <Content Include="vendor\rater-js-master\lib\star_0.svg" />
+    <Content Include="vendor\rater-js-master\lib\star_1.svg" />
+    <Content Include="vendor\rater-js-master\lib\style.css" />
+    <Content Include="vendor\rater-js-master\ratings.png" />
+    <Content Include="vendor\rater-js-master\test\test.js" />
+    <Content Include="vendor\scrollreveal\scrollreveal.es.js" />
+    <Content Include="vendor\scrollreveal\scrollreveal.js" />
+    <Content Include="vendor\scrollreveal\scrollreveal.min.js" />
+    <Content Include="vendor\select2\select2.css" />
+    <Content Include="vendor\select2\select2.js" />
+    <Content Include="vendor\select2\select2.min.css" />
+    <Content Include="vendor\select2\select2.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\User_Login\Login.cshtml" />
+    <Content Include="vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="vendor\bootstrap\css\bootstrap.css.map" />
+    <Content Include="vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Views\User_Login\Registeration.cshtml" />
+    <Content Include="Views\User_Login\VerifyAccount.cshtml" />
+    <Content Include="Views\Verify\phoneVerify.cshtml" />
+    <Content Include="Views\Verify\codePage.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\LoginLayout.cshtml" />
+    <Content Include="vendor\jquery\jquery.min.map" />
+    <Content Include="vendor\jquery\jquery.slim.min.map" />
+    <Content Include="Views\Shared\UserLayout.cshtml" />
+    <Content Include="Views\User\mylistings.cshtml" />
+    <Content Include="Views\User\affiliate_links.cshtml" />
+    <Content Include="Views\User\affiliate_trans.cshtml" />
+    <Content Include="Views\User\mybank.cshtml" />
+    <Content Include="Views\User\google_auth.cshtml" />
+    <Content Include="Views\User\pers_info.cshtml" />
+    <Content Include="Views\User\mytrans.cshtml" />
+    <Content Include="Views\Verify\passportID.cshtml" />
+    <Content Include="Views\Contract\Index.cshtml" />
+    <Content Include="Views\Contract\bankDetail.cshtml" />
+    <Content Include="Views\Contract\sellTransPage.cshtml" />
+    <Content Include="Views\Contract\buyTransPage.cshtml" />
+    <Content Include="Views\Verify\googleAuthPage.cshtml" />
+    <Content Include="vendor\country-select-js-master\bower.json" />
+    <Content Include="vendor\country-select-js-master\LICENSE" />
+    <Content Include="vendor\country-select-js-master\package.json" />
+    <Content Include="vendor\country-select-js-master\README.md" />
+    <Content Include="vendor\country-select-js-master\src\scss\countrySelect.scss" />
+    <Content Include="vendor\country-select-js-master\src\scss\_selector.scss" />
+    <Content Include="vendor\country-select-js-master\src\scss\_sprites.scss" />
+    <Content Include="vendor\country-select-js-master\src\scss\_utils.scss" />
+    <Content Include="vendor\country-select-js-master\src\scss\_variables.scss" />
+    <Content Include="vendor\intl-tel-input\.eslintignore" />
+    <Content Include="vendor\intl-tel-input\.eslintrc" />
+    <Content Include="vendor\intl-tel-input\.github\CONTRIBUTING.md" />
+    <Content Include="vendor\intl-tel-input\.github\ISSUE_TEMPLATE.md" />
+    <Content Include="vendor\intl-tel-input\.travis.yml" />
+    <Content Include="vendor\intl-tel-input\bower.json" />
+    <Content Include="vendor\intl-tel-input\CHANGELOG.md" />
+    <Content Include="vendor\intl-tel-input\composer.json" />
+    <Content Include="vendor\intl-tel-input\examples\js\countrySync.js.ejs" />
+    <Content Include="vendor\intl-tel-input\examples\js\defaultCountryIp.js.ejs" />
+    <Content Include="vendor\intl-tel-input\examples\js\displayNumber.js.ejs" />
+    <Content Include="vendor\intl-tel-input\examples\js\hiddenInput.js.ejs" />
+    <Content Include="vendor\intl-tel-input\examples\js\initPromise.js.ejs" />
+    <Content Include="vendor\intl-tel-input\examples\js\isValidNumber.js.ejs" />
+    <Content Include="vendor\intl-tel-input\examples\js\modifyCountryData.js.ejs" />
+    <Content Include="vendor\intl-tel-input\examples\js\multipleInstances.js.ejs" />
+    <Content Include="vendor\intl-tel-input\examples\js\nationalMode.js.ejs" />
+    <Content Include="vendor\intl-tel-input\examples\js\onlyCountriesEurope.js.ejs" />
+    <Content Include="vendor\intl-tel-input\examples\template.html.ejs" />
+    <Content Include="vendor\intl-tel-input\grunt\tmpl\sprite.scss.mustache" />
+    <Content Include="vendor\intl-tel-input\LICENSE" />
+    <Content Include="vendor\intl-tel-input\package-lock.json" />
+    <Content Include="vendor\intl-tel-input\package.json" />
+    <Content Include="vendor\intl-tel-input\README.md" />
+    <Content Include="vendor\intl-tel-input\src\css\demo.scss" />
+    <Content Include="vendor\intl-tel-input\src\css\intlTelInput.scss" />
+    <Content Include="vendor\intl-tel-input\src\css\sprite.scss" />
+    <Content Include="vendor\iban.js\.npmignore" />
+    <Content Include="vendor\iban.js\bower.json" />
+    <Content Include="vendor\iban.js\demo\.DS_Store" />
+    <Content Include="vendor\iban.js\demo\bower.json" />
+    <Content Include="vendor\iban.js\demo\bower_components\.DS_Store" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\.bower.json" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\.DS_Store" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\bower.json" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\CHANGELOG.md" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\dist\.DS_Store" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\dist\css\bootstrap-theme.min.css.map" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\dist\css\bootstrap.css.map" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\dist\css\bootstrap.min.css.map" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\Gemfile" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\Gemfile.lock" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\grunt\.jshintrc" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\grunt\configBridge.json" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\grunt\npm-shrinkwrap.json" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\grunt\sauce_browsers.yml" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\ISSUE_TEMPLATE.md" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\js\.jscsrc" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\js\.jshintrc" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\.csscomb.json" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\.csslintrc" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\alerts.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\badges.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\bootstrap.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\breadcrumbs.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\button-groups.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\buttons.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\carousel.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\close.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\code.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\component-animations.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\dropdowns.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\forms.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\glyphicons.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\grid.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\input-groups.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\jumbotron.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\labels.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\list-group.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\media.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\alerts.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\background-variant.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\border-radius.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\buttons.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\center-block.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\clearfix.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\forms.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\gradients.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\grid-framework.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\grid.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\hide-text.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\image.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\labels.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\list-group.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\nav-divider.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\nav-vertical-align.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\opacity.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\pagination.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\panels.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\progress-bar.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\reset-filter.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\reset-text.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\resize.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\responsive-visibility.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\size.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\tab-focus.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\table-row.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\text-emphasis.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\text-overflow.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\mixins\vendor-prefixes.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\modals.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\navbar.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\navs.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\normalize.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\pager.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\pagination.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\panels.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\popovers.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\print.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\progress-bars.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\responsive-embed.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\responsive-utilities.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\scaffolding.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\tables.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\theme.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\thumbnails.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\tooltip.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\type.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\utilities.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\variables.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\less\wells.less" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\LICENSE" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\nuget\bootstrap.less.nuspec" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\nuget\bootstrap.nuspec" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\nuget\MyGet.ps1" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\package.json" />
+    <Content Include="vendor\iban.js\demo\bower_components\bootstrap\README.md" />
+    <Content Include="vendor\iban.js\demo\bower_components\chai\.bower.json" />
+    <Content Include="vendor\iban.js\demo\bower_components\chai\bower.json" />
+    <Content Include="vendor\iban.js\demo\bower_components\chai\CODE_OF_CONDUCT.md" />
+    <Content Include="vendor\iban.js\demo\bower_components\chai\CONTRIBUTING.md" />
+    <Content Include="vendor\iban.js\demo\bower_components\chai\History.md" />
+    <Content Include="vendor\iban.js\demo\bower_components\chai\package.json" />
+    <Content Include="vendor\iban.js\demo\bower_components\chai\README.md" />
+    <Content Include="vendor\iban.js\demo\bower_components\chai\ReleaseNotes.md" />
+    <Content Include="vendor\iban.js\demo\bower_components\iban\.bower.json" />
+    <Content Include="vendor\iban.js\demo\bower_components\iban\bower.json" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\.bower.json" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\bower.json" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\dist\jquery.min.map" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\dist\jquery.slim.min.map" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\external\sizzle\dist\sizzle.min.map" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\README.md" />
+    <Content Include="vendor\iban.js\demo\bower_components\jquery\src\.eslintrc.json" />
+    <Content Include="vendor\iban.js\LICENSE" />
+    <Content Include="vendor\iban.js\package-lock.json" />
+    <Content Include="vendor\iban.js\package.json" />
+    <Content Include="vendor\iban.js\README.md" />
+    <Content Include="Views\Contract\uploadReciptPage.cshtml" />
+    <Content Include="Views\Verify\IdVerify.cshtml" />
+    <Content Include="vendor\basictable-master\bower.json" />
+    <Content Include="vendor\basictable-master\LICENSE" />
+    <Content Include="vendor\basictable-master\package.json" />
+    <Content Include="vendor\basictable-master\README.md" />
+    <Content Include="Views\Home\status.cshtml" />
+    <Content Include="Views\Home\user_info.cshtml" />
+    <Content Include="vendor\rater-js-master\.gitignore" />
+    <Content Include="vendor\rater-js-master\.travis.yml" />
+    <Content Include="vendor\rater-js-master\bower.json" />
+    <Content Include="vendor\rater-js-master\LICENSE" />
+    <Content Include="vendor\rater-js-master\package-lock.json" />
+    <Content Include="vendor\rater-js-master\package.json" />
+    <Content Include="vendor\rater-js-master\README.md" />
+    <Content Include="vendor\rater-js-master\_config.yml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="Uploads\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="vendor\rater-js-master\index.d.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1801</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1806/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

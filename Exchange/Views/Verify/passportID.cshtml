@@ -1,0 +1,211 @@
+﻿@model Exchange.AzureModel.UserSignupPage
+@{
+    ViewBag.Title = "passportID";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/green.css")
+@Styles.Render("~/Content/login.css")
+<link rel="stylesheet" href="~/vendor/intl-tel-input/build/css/intlTelInput.css">
+<script src="~/vendor/intl-tel-input/build/js/intlTelInput.js"></script>
+<script src="~/vendor/intl-tel-input/build/js/utils.js"></script>
+<section id="">
+    <div class="content margin-bottom60">
+        <div class="container">
+            <div class="row m-t-150">
+                <div id="sidebar" class="sidebar  col-sm-3 col-md-3 col-lg-3">
+                    <div class="">
+                        <h3 class="text-green font-weight-bold">BTCUSD</h3>
+                        <h3 class="text-white" id="currentPrice"></h3>
+                        <h4 class="text-white">price now</h4>
+                    </div>
+                </div>
+                <!-- Left Section -->
+                <div class="col-sm-6 m-t-50 col-md-6 col-lg-6">
+                    <div class="alert alert-success" style="display:none">
+                        @if (double.Parse(Session["cash"].ToString()) >= 1000)
+                        {
+                            <p>Your KYC was verified.</p>
+                        }
+                        <p id="suc_msg"></p>
+                    </div>
+                    <div id="information">
+                        <div class="m-b-30 text-center">
+                            <h4 class="text-white">Please tell us something about your self.</h4>
+                        </div>
+                        <div class="alert alert-danger" style="display:none">
+                            <strong>Error!</strong>
+                            <p id="err_msg"></p>
+                        </div>
+                        @using (Html.BeginForm("saveUserInfo", "Verify", FormMethod.Post, new { @class = "login100-form validate-form", role = "form", enctype = "multipart/form-data", id = "upload" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="row">
+                                <div class="col-lg-6 text-right">
+                                    <h5 class="text-white m-t-5">First name</h5>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="wrap-input100 validate-input m-b-16" data-validate="Firstname is required">
+                                        @Html.EditorFor(model => model.firstname, new { htmlAttributes = new { @class = "input100", style = "height:40px" } })
+                                        <span class="focus-input100"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 text-right">
+                                    <h5 class="text-white m-t-5">Last name</h5>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="wrap-input100 validate-input m-b-16" data-validate="Lastname is required">
+                                        @Html.EditorFor(model => model.lastname, new { htmlAttributes = new { @class = "input100", style = "height:40px" } })
+                                        <span class="focus-input100"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 text-right">
+                                    <h5 class="text-white m-t-5">Pick a username</h5>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="wrap-input100 validate-input m-b-16" data-validate="Username is required">
+                                        @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "input100", style = "height:40px" } })
+                                        <span class="focus-input100"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 text-right">
+                                    <h5 class="text-white m-t-5">your email</h5>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="wrap-input100 validate-input m-b-16" data-validate="Email is required">
+                                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "input100", style = "height:40px" } })
+                                        <span class="focus-input100"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 text-right">
+                                    <h5 class="text-white m-t-5">Phone number</h5>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="wrap-input100 validate-input m-b-16" data-validate="Phone number is required">
+                                        <input class="input100" style="height:40px" value="@ViewData["phoneNumber"].ToString()" name="phone" id="phone" disabled="disabled" readonly/>
+                                        <span class="focus-input100"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 text-right">
+                                    <h5 class="text-white m-t-5">Choose a password</h5>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="wrap-input100 validate-input m-b-16" data-validate="Password must consists of at least 8 characters">
+                                        <input class="input100" type="password" style="height:40px" name="password" placeholder="">
+                                        <span class="focus-input100"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 text-right">
+                                    <h5 class="text-white m-t-5">Retype password</h5>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="wrap-input100 validate-input m-b-16" data-validate="Confirm Password should be same as password">
+                                        <input class="input100" type="password" style="height:40px" name="confirm" placeholder="">
+                                        <span class="focus-input100"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container">
+                                @if (double.Parse(Session["cash"].ToString()) >= 1000)
+                                {
+                                    <h5 class="text-white">Upload a passport, ID card, or driver's license</h5>
+                                    <div class="wrap-input100 validate-input m-b-16" data-validate="Please open file">
+                                        <img src="~/images/open.png" class="w-100 bgwhite" id="id_image" alt="Browse" onerror="this.style.display='none'" />
+                                        <input type="file" class="input100" style="display:none" name="file" id="file_open" />
+                                    </div>
+                                }
+                            </div>
+                            <div class="m-t-17 text-center">
+                                @Html.ActionLink("BACK", "index", "Home", null, htmlAttributes: new { @class = "text-white fs-10 back-link" })
+                                <button class="btn bg-green text-white">
+                                    Next
+                                </button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Main Content -->
+</section>
+<div id="loaderDiv" style="width: 100%; height: 100%; top: 0px; left: 0px; position: fixed; display: none; opacity: 0.8; background-color: #2a2a2a;text-align:center; z-index: 99; text-align: center; -webkit-transition: background-color 0;transition: background-color 0;">
+    <div style="width: 100%; height: 50%; top: 0px; left: 0px;"></div>
+    <h4 class="text-white" style=" text-align:center; top: 45%;left:35%; z-index: 600; ">The verification process will take about 10 minutes max, please wait</h4>
+    <img src="~/images/ajax-loader1.gif" alt="Loading" class="mx-auto" style=" top: 50%; left: 50%; z-index: 600; " />
+</div>
+<script src="~/Scripts/Custom/login.js"></script>
+<script>
+    $(document).ready(function () {
+        var input = document.querySelector("#phone");
+        var iti = window.intlTelInput(input, {
+            initialCountry: "auto",
+            separateDialCode: true,
+            geoIpLookup: function (callback) {
+                $.get('https://ipinfo.io', function () { }, "jsonp").always(function (resp) {
+                    var countryCode = (resp && resp.country) ? resp.country : "";
+                    callback(countryCode);
+                });
+            },
+            utilsScript: "~vendor/intl-tel-input/build/js/utils.js?1537727621611" // just for formatting/placeholders etc
+        });
+        $("#id_image").click(function () {
+            $("#file_open").click();
+        });
+        $("#file_open").on("change", function (evt) {
+            var fullpath = URL.createObjectURL(evt.target.files[0]);
+            $("#id_image").attr("src", fullpath);
+        });
+        $("#upload").submit(function (e) {
+            e.preventDefault();
+            var inputEle = $('.validate-input .input100');
+            var check = true;
+            for (var i = 0; i < inputEle.length; i++) {
+                if (validate(inputEle[i]) == false) {
+                    check = false;
+                }
+            }
+            if (!check)
+                return;
+            $("#loaderDiv").show();
+            $(".alert-danger").hide();
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: new FormData(this),
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    var res = JSON.parse(data);
+                    console.log(res.state);
+                    console.log(res.message);
+                    if (res.state) {
+                        $("#suc_msg").html(res.message);
+                        $(".alert-success").show();
+                        $("#information").hide();
+                    } else {
+                        $("#err_msg").html(res.message);
+                        $(".alert-danger").show();
+                    }
+                    $("#loaderDiv").hide();
+                },
+                error: function (xhr, error, status) {
+                    console.log(error, status);
+                    $("#loaderDiv").hide();
+                }
+            });
+        });
+    });
+</script>

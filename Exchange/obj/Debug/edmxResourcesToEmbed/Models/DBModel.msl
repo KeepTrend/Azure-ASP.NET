@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="exchange_dbModelStoreContainer" CdmEntityContainer="ExchangeDB">
+    <EntitySetMapping Name="user_table">
+      <EntityTypeMapping TypeName="exchange_dbModel.user_table">
+        <MappingFragment StoreEntitySet="user_table">
+          <ScalarProperty Name="phoneCode" ColumnName="phoneCode" />
+          <ScalarProperty Name="phoneVerified" ColumnName="phoneVerified" />
+          <ScalarProperty Name="emailCode" ColumnName="emailCode" />
+          <ScalarProperty Name="emailVerified" ColumnName="emailVerified" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="cellphone" ColumnName="cellphone" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

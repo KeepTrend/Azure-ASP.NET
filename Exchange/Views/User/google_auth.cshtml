@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewBag.Title = "google_auth";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+<div class="m-t-150 m-l-150">
+
+    @if (ViewData["step"].ToString() == "first")
+    {
+        <div class="col-9 m-t-200">
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-danger">
+                    <strong>Error!</strong>
+                    <p>@ViewBag.Message</p>
+                </div>
+            }
+            <h4 class="text-white mx-auto">To activate or get a new Google Authenticator code, please click the button below to start the verification process</h4>
+            @Html.ActionLink("Send code to my phone", "sendSmsCode", "User", null, htmlAttributes: new { @class = "btn btn-color" })
+        </div>
+    }
+    else if (ViewData["step"].ToString() == "second")
+    {
+        if (ViewBag.Message != null)
+        {
+            <div class="alert alert-danger">
+                <strong>Error!</strong>
+                <p>@ViewBag.Message</p>
+            </div>
+        }
+        using (Html.BeginForm("validateSms", "user"))
+        {
+            <div class="col-6 m-t-30">
+                <h4 class="text-white mx-auto">Please type the 6 digit code we have sent to your phone</h4>
+                <input class="w-100 mx-auto m-t-40" name="phoneCode" />
+                <button class="btn btn-color w-100 m-t-40">Validate</button>
+            </div>
+        }
+    }
+    else if (ViewData["step"].ToString() == "third")
+    {
+        <div class="alert alert-success" style="display:none">
+            <strong>Success!</strong>
+            <p></p>
+        </div>
+        <div id="information">
+            <div class="alert alert-danger dis-none">
+                <strong>Error!</strong>
+                <p>Invalid code!</p>
+            </div>
+            <div class="col-4 mx-auto">
+                <img src="@ViewData["qrUrl"]" />
+            </div>
+            <div class="m-t-30">
+                <h4 class="text-white">Open the app google authenticator on your phone and scan the picture above.</h4>
+            </div>
+            <div class="col-8 mx-auto">
+                @using (Html.BeginForm("validateQRCode", "Verify", FormMethod.Post, new { @class = "login100-form validate-form", role = "form", id = "upload" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="wrap-input100 validate-input m-b-16" data-validate="Code is required">
+                        <input class="input100" placeholder="Input Code" name="qrCode" />
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="container-login100-form-btn m-t-17">
+                        <button class="btn login100-form-btn btn-signup">
+                            VALIDATE
+                        </button>
+                    </div>
+                }
+            </div>
+            <div class="col-8 mx-auto row m-t-50">
+                <div class="col-lg-6">
+                    <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank"><img src="~/images/googleplay.png" style="width:40%;" /></a>
+                </div>
+                <div class="col-lg-6">
+                    <a href="https://itunes.apple.com/app/google-authenticator/id388497605?mt=8" target="_blank"><img src="~/images/appstore.png" class="m-t-10" style="width:80%;" /></a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#upload").submit(function (e) {
+            e.preventDefault();
+            var inputEle = $('.validate-input .input100');
+            var check = true;
+            for (var i = 0; i < inputEle.length; i++) {
+                if (validate(inputEle[i]) == false) {
+                    check = false;
+                }
+            }
+            if (!check)
+                return;
+            $(".alert-danger").hide();
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: new FormData(this),
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data == "success") {
+                        $(".alert-success").show();
+                        $("#information").hide();
+                    } else {
+                        $(".alert-danger").show();
+                    }
+                }
+            });
+        });
+    });
+</script>

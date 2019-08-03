@@ -1,0 +1,99 @@
+﻿@model Exchange.AzureModel.user_table
+@{
+    ViewBag.Title = "pers_info";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+<link rel="stylesheet" href="~/vendor/intl-tel-input/build/css/intlTelInput.css">
+<script src="~/vendor/intl-tel-input/build/js/intlTelInput.js"></script>
+<script src="~/vendor/intl-tel-input/build/js/utils.js"></script>
+<div class="col-8 mx-auto m-t-150">
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-danger">
+            <strong>Error!</strong>
+            <p>@ViewBag.Message</p>
+        </div>
+    }
+    @using (Html.BeginForm("savePersInfo", "User", FormMethod.Post, new { @class = "login100-form validate-form", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-lg-4 text-right">
+                <h4 class="text-white m-t-5">Firstname</h4>
+            </div>
+            <div class="col-lg-8">
+                <div class="wrap-input100 validate-input m-b-16" data-validate="Firstname is required">
+                    @Html.EditorFor(model => model.firstname, new { htmlAttributes = new { @class = "input100", style = "height:40px" } })
+                    <span class="focus-input100"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 text-right">
+                <h4 class="text-white m-t-5">Lastname</h4>
+            </div>
+            <div class="col-lg-8">
+                <div class="wrap-input100 validate-input m-b-16" data-validate="Lastname is required">
+                    @Html.EditorFor(model => model.lastname, new { htmlAttributes = new { @class = "input100", style = "height:40px" } })
+                    <span class="focus-input100"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 text-right">
+                <h4 class="text-white m-t-5">Username</h4>
+            </div>
+            <div class="col-lg-8">
+                <div class="wrap-input100 validate-input m-b-16" data-validate="Username is required">
+                    @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "input100", style = "height:40px" } })
+                    <span class="focus-input100"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 text-right">
+                <h4 class="text-white m-t-5">Email</h4>
+            </div>
+            <div class="col-lg-8">
+                <div class="wrap-input100 validate-input m-b-16" data-validate="Email is required">
+                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "input100", style = "height:40px" } })
+                    <span class="focus-input100"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 text-right">
+                <h4 class="text-white m-t-5">Phone number</h4>
+            </div>
+            <div class="col-lg-8">
+                <div class="wrap-input100 validate-input m-b-16" data-validate="Phone number is required">
+                    @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "input100", style = "height:40px", @readonly = "readonly" } })
+                    <span class="focus-input100"></span>
+                </div>
+            </div>
+        </div>
+        <div class="container-login100-form-btn m-t-17 w-75 mx-auto">
+            <button class="btn login100-form-btn btn-signup">
+                SAVE
+            </button>
+        </div>
+    }
+</div>
+
+<script>
+    $(document).ready(function () {
+        var input = document.querySelector("#phone");
+        var iti = window.intlTelInput(input, {
+            initialCountry: "auto",
+            separateDialCode: true,
+            geoIpLookup: function (callback) {
+                $.get('https://ipinfo.io', function () { }, "jsonp").always(function (resp) {
+                    var countryCode = (resp && resp.country) ? resp.country : "";
+                    callback(countryCode);
+                });
+            },
+            utilsScript: "~vendor/intl-tel-input/build/js/utils.js?1537727621611" // just for formatting/placeholders etc
+        });
+    });
+</script>

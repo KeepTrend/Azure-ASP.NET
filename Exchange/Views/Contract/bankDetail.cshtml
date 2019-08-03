@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "bankDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/green.css")
+@Styles.Render("~/Content/userpage.css")
+<link rel="stylesheet" type="text/css" href="~/Content/login.css">
+<section id="">
+    <div class="content margin-bottom60">
+        <div class="container">
+            <div class="row m-t-150">
+                <div id="sidebar" class="sidebar  col-sm-3 col-md-3 col-lg-3">
+                    <div class="">
+                        <h3 class="text-green">BTCUSD</h3>
+                        <h3 class="text-white" id="currentPrice">@Session["currentPrice"]</h3>
+                        <h4 class="text-white">price now</h4>
+                    </div>
+                </div>
+                <!-- Left Section -->
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    <div class="col-sm-10 p-l-80 col-md-10 col-lg-10">
+                        <h4 class="text-white dis-inline">Dear</h4>
+                        <h4 class="text-green dis-inline">@Session["username"]</h4>
+                        <h4 class="text-white dis-inline">you have agreed to send</h4>
+                        <h4 class="text-green dis-inline">@Session["btc_amount"] BTC</h4>
+                        <h4 class="text-white dis-inline">to</h4>
+                        <h4 class="text-green dis-inline">@Session["buyerName"]</h4>
+                        <h4 class="text-white dis-inline">, and in exchange will pay you</h4>
+                        <h4 class="text-green dis-inline">$@Session["cash"]</h4>
+                        <h4 class="text-white dis-inline">directly in your bank account.</h4>
+                        <h4 class="text-white dis-inline">To receive the $@Session["cash"] please fill in your bank account details below.</h4>
+                        <p class="text-white">Don't worry, we will release @Session["btc_amount"] BTC to @Session["buyerName"],only after you have received the wire of @Session["cash"].</p>
+                    </div>
+                    <div class="col-sm-8 p-l-80 m-t-50 col-md-8 col-lg-8">
+                        @using (Html.BeginForm("saveBankDetail", "Contract", FormMethod.Post, new { @class = "login100-form validate-form", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="row">
+                                <div class="col-lg-4 text-right">
+                                    <h4 class="text-white m-t-5">First name</h4>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="wrap-input100 validate-input m-b-16" data-validate="Firstname is required">
+                                        <input class="input100" placeholder="" name="firstname" style="height:40px" />
+                                        <span class="focus-input100"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4 text-right">
+                                    <h4 class="text-white m-t-5">Last name</h4>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="wrap-input100 validate-input m-b-16" data-validate="Lastname is required">
+                                        <input class="input100" placeholder="" name="lastname" style="height:40px" />
+                                        <span class="focus-input100"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4 text-right">
+                                    <h4 class="text-white m-t-5">IBAN</h4>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="wrap-input100 validate-input m-b-16" data-validate="IBAN is required">
+                                        <input class="input100" placeholder="" name="IBAN" style="height:40px" />
+                                        <span class="focus-input100"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4 text-right">
+                                    <h4 class="text-white m-t-5">SWIFT</h4>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="wrap-input100 validate-input m-b-16" data-validate="SWIFT is required">
+                                        <input class="input100" placeholder="" name="SWIFT" style="height:40px" />
+                                        <span class="focus-input100"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4 text-right">
+                                    <h4 class="text-white m-t-5">REFERENCE</h4>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="wrap-input100 validate-input m-b-16" data-validate="REFERENCE is required">
+                                        <input class="input100" placeholder="" name="REFERENCE" style="height:40px" value="@ViewData["REFERENCE"]" disabled/>
+                                        <span class="focus-input100"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container-login100-form-btn m-t-17 w-75 mx-auto">
+                                <button class="btn login100-form-btn btn-signup">
+                                    SAVE ACOUNT DETAILS, NEXT
+                                </button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Main Content -->
+</section>
+
+
+
+

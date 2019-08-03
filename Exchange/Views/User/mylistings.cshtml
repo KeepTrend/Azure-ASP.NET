@@ -1,0 +1,190 @@
+﻿@model Exchange.AzureModel.user_table
+@{
+    ViewBag.Title = "mylistings";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+@Styles.Render("~/Content/checkbox.css")
+<div class="col-12 mx-auto m-t-100">
+    <div class="row mx-auto">
+        <h3 class="text-white">I can exchange the followings:</h3>
+    </div>
+    @using (Html.BeginForm("saveMylisting", "User", FormMethod.Post, new { id = "upload"}))
+    {
+    <div class="row mx-auto m-t-20">
+        <h4 class="text-green dis-inline m-r-10">BTC</h4>
+        <div class="checkbox dis-inline">
+            <div class="contact100-form-checkbox">
+                @if (Model.check_btc == true)
+                {
+                    <input id="check_btc" name="check_btc" type="checkbox" checked="checked" class="input-checkbox100" />
+                }
+                else
+                {
+                    <input id="check_btc" name="check_btc" type="checkbox" class="input-checkbox100" />
+                }
+                <label class="label-checkbox100 m-t-8" for="check_btc"></label>
+            </div>
+        </div>
+        <h4 class="text-white dis-inline  m-r-10">cash</h4>
+        <div class="checkbox dis-inline">
+            <div class="contact100-form-checkbox">
+                @if (Model.btc_cash == true)
+                {
+                    <input id="btc_cash" name="btc_cash" type="checkbox" checked="checked" class="input-checkbox100" />
+                }
+                else
+                {
+                    <input id="btc_cash" name="btc_cash" type="checkbox" class="input-checkbox100" />
+                }
+                <label class="label-checkbox100 m-t-8" for="btc_cash"></label>
+            </div>
+        </div>
+        <div>
+            <p class="text-white" style="position:absolute;top:30px;">Comission:</p>
+            @Html.EditorFor(model => model.btc_cash_com, new { htmlAttributes = new { @class = "dis-inline fs-20 m-r-2 lising-input" } })
+            <h4 class="text-white dis-inline  m-r-10">%</h4>
+        </div>
+        <h4 class="text-white dis-inline  m-r-10">wire transfer</h4>
+        <div class="checkbox dis-inline">
+            <div class="contact100-form-checkbox">
+                @if (Model.btc_wire == true)
+                {
+                    <input id="btc_wire" name="btc_wire" type="checkbox" checked="checked" class="input-checkbox100" />
+                }
+                else
+                {
+                    <input id="btc_wire" name="btc_wire" type="checkbox" class="input-checkbox100" />
+                }
+                <label class="label-checkbox100 m-t-8" for="btc_wire"></label>
+            </div>
+        </div>
+        <div>
+            <p class="text-white" style="position:absolute;top:30px;">Comission:</p>
+            @Html.EditorFor(model => model.btc_wire_com, new { htmlAttributes = new { @class = "dis-inline fs-20 m-r-2 lising-input" } })
+            <h4 class="text-white dis-inline  m-r-10">%</h4>
+        </div>
+    </div>
+    <div class="row mx-auto m-t-10">
+        <h4 class="text-green dis-inline m-r-10">ETH</h4>
+        <div class="checkbox dis-inline">
+            <div class="contact100-form-checkbox">
+                @if (Model.check_eth == true)
+                {
+                    <input id="check_eth" name="check_eth" type="checkbox" checked="checked" class="input-checkbox100" />
+                }
+                else
+                {
+                    <input id="check_eth" name="check_eth" type="checkbox" class="input-checkbox100" />
+                }
+                <label class="label-checkbox100 m-t-8" for="check_eth"></label>
+            </div>
+        </div>
+
+        <h4 class="text-white dis-inline m-r-10">cash</h4>
+        <div class="checkbox dis-inline">
+            <div class="contact100-form-checkbox">
+                @if (Model.eth_cash == true)
+                {
+                    <input id="eth_cash" name="eth_cash" type="checkbox" checked="checked" class="input-checkbox100" />
+                }
+                else
+                {
+                    <input id="eth_cash" name="eth_cash" type="checkbox" class="input-checkbox100" />
+                }
+                <label class="label-checkbox100 m-t-8" for="eth_cash"></label>
+            </div>
+        </div>
+        <div>
+            @Html.EditorFor(model => model.eth_cash_com, new { htmlAttributes = new { @class = "dis-inline fs-20 m-r-2 lising-input" } })
+            <h4 class="text-white dis-inline  m-r-10">%</h4>
+        </div>
+        <h4 class="text-white dis-inline m-r-10">wire transfer</h4>
+        <div class="checkbox dis-inline">
+            <div class="contact100-form-checkbox">
+                @if (Model.eth_wire == true)
+                {
+                    <input id="eth_wire" name="eth_wire" type="checkbox" checked="checked" class="input-checkbox100" />
+                }
+                else
+                {
+                    <input id="eth_wire" name="eth_wire" type="checkbox" class="input-checkbox100" />
+                }
+                <label class="label-checkbox100 m-t-8" for="eth_wire"></label>
+            </div>
+        </div>
+        <div>
+            @Html.EditorFor(model => model.eth_wire_com, new { htmlAttributes = new { @class = "dis-inline fs-20 m-r-2 lising-input" } })
+            <h4 class="text-white dis-inline  m-r-10">%</h4>
+        </div>
+    </div>
+
+    <div class="row mx-auto m-t-10">
+        <h4 class="dis-inline text-white m-r-10">from</h4>
+        @Html.EditorFor(model => model.from_cash, new { htmlAttributes = new { @class = "dis-inline fs-20 h-100 m-r-10 lising-input" } })
+        <h4 class="dis-inline text-white m-r-10">to</h4>
+        @Html.EditorFor(model => model.to_cash, new { htmlAttributes = new { @class = "dis-inline fs-20 h-100 m-r-10 lising-input" } })
+    </div>
+    <div class="row mx-auto m-t-15">
+        <div class="col-2 m-l-0 p-l-0">
+            <h4 class="dis-inline text-white m-r-10">Country</h4>
+        </div>
+        <div class="col-10">
+            <input type="text" id="country" class="dis-inline fs-20 h-100 listing-country">
+            @Html.HiddenFor(model => model.country, new { id = "country_code", name = "country_code" })
+        </div>
+    </div>
+    <div class="row mx-auto m-t-15">
+        <div class="col-2 m-l-0 p-l-0">
+            <h4 class="dis-inline text-white m-r-10">City</h4>
+        </div>
+        <div class="col-10">
+            @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "dis-inline fs-20 h-100 listing-country" } })
+        </div>
+    </div>
+    <div class="row mx-auto m-t-15">
+        <h4 class="text-white dis-inline m-r-10">List me on home page with users</h4>
+        <div class="checkbox dis-inline">
+            <div class="contact100-form-checkbox">
+                <input id="listme" name="listme" type="checkbox" checked="checked" class="input-checkbox100"/>
+                <label class="label-checkbox100 m-t-8" for="listme"></label>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="col-6 m-t-30">
+            <button class="btn btn-color w-100 login100-form-btn">SAVE</button>
+        </div>
+    </div>
+    }
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#country").countrySelect();
+        $("#country").countrySelect("selectCountry", "@Model.country");
+        $('.fs-20').click(function () {
+            $(this).removeClass("border-alert");
+        });
+        $('#upload').on('submit', function () {
+            var inputEle = $('.fs-20');
+            var check = true;
+
+            for (var i = 0; i < inputEle.length; i++) {
+                if (validate(inputEle[i]) == false) {
+                    showValidate(inputEle[i]);
+                    check = false;
+                }
+            }
+            return check;
+        });
+        function validate(input) {
+            if ($(input).val() == "") {
+                return false;
+            }
+            return true;
+        }
+        function showValidate(input) {
+            $(input).addClass("border-alert");
+        }
+    });
+</script>

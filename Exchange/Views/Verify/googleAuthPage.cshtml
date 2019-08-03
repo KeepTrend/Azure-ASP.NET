@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = "googleAuthPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/green.css")
+@Styles.Render("~/Content/userpage.css")
+<link rel="stylesheet" type="text/css" href="~/Content/login.css">
+<section id="">
+    <div class="content margin-bottom60">
+        <div class="container">
+            <div class="row m-t-150">
+                <div id="sidebar" class="sidebar  col-sm-3 col-md-3 col-lg-3">
+                    <div class="">
+                        <h3 class="text-green font-weight-bold">BTCUSD</h3>
+                        <h3 class="text-white" id="currentPrice"></h3>
+                        <h4 class="text-white">price now</h4>
+                    </div>
+                </div>
+                <!-- Left Section -->
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    @if (ViewBag.scanned == false)
+                    {
+                        <div class="col-sm-6 p-l-130 m-t-50 col-md-6 col-lg-6">
+                            <img src="@ViewData["qrUrl"]" />
+                        </div>
+                        <div class="m-t-30 m-l-60 col-sm-6 col-md-6 col-lg-6">
+                            <h4 class="text-white">Open the app google authenticator on your phone and scan the picture above.</h4>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="m-t-30 m-l-60 col-sm-6 col-md-6 col-lg-6">
+                            <h4 class="text-white">Please type the code you see in your Google Authenticator app on your phone, right now.</h4>
+                        </div>
+                    }
+                    <div class="alert alert-danger dis-none">
+                        <strong>Error!</strong>
+                        <p>Invalid code!</p>
+                    </div>
+                    <div class="col-sm-6 p-l-80 m-t-50 col-md-6 col-lg-6">
+                        @using (Html.BeginForm("validateQRCode", "Verify", FormMethod.Post, new { @class = "login100-form validate-form flex-sb flex-w", role = "form",id = "upload" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="wrap-input100 validate-input m-b-16" data-validate="Code is required">
+                                <input class="input100" placeholder="Input Code" name="qrCode" />
+                                <span class="focus-input100"></span>
+                            </div>
+
+                            <div class="container-login100-form-btn m-t-17">
+                                <button class="btn login100-form-btn btn-signup">
+                                    VALIDATE
+                                </button>
+                            </div>
+                        }
+                    </div>
+                    @if (ViewBag.scanned == false)
+                    {
+                        <div class="col-8 row m-t-50 m-l-80">
+                            <div class="col-lg-3">
+                                <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank"><img src="~/images/googleplay.png" style="width:50px;height:50px" /></a>
+                            </div>
+                            <div class="col-lg-3">
+                                <a href="https://itunes.apple.com/app/google-authenticator/id388497605?mt=8" target="_blank"><img src="~/images/appstore.png" class="m-t-10" style="width:150px;" /></a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Main Content -->
+</section>
+
+<script>
+    $(document).ready(function () {
+        $("#upload").submit(function (e) {
+            e.preventDefault();
+            var inputEle = $('.validate-input .input100');
+            var check = true;
+            for (var i = 0; i < inputEle.length; i++) {
+                if (validate(inputEle[i]) == false) {
+                    check = false;
+                }
+            }
+            if (!check)
+                return;
+            $(".alert-danger").hide();
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: new FormData(this),
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data == "success") {
+                        location.href = "@Session["next_url"].ToString()";
+                    } else {
+                        $(".alert-danger").show();
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+
+

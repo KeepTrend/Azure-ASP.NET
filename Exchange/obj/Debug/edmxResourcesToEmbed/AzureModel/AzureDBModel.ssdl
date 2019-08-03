@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="exchange_dbModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="trans_history">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="buyer" Type="int" />
+    <Property Name="seller" Type="int" />
+    <Property Name="btc" Type="float" />
+    <Property Name="cash" Type="float" />
+    <Property Name="holdBTC" Type="bit" />
+    <Property Name="sentBTC" Type="bit" />
+    <Property Name="sentCash" Type="bit" />
+    <Property Name="recieveCash" Type="bit" />
+    <Property Name="holdTransID" Type="varchar" MaxLength="50" />
+    <Property Name="sentTransID" Type="varchar" MaxLength="50" />
+    <Property Name="status" Type="varchar" MaxLength="50" />
+    <Property Name="holdWallet" Type="varchar" MaxLength="50" />
+    <Property Name="buyerWallet" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="user_table">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="firstname" Type="varchar" MaxLength="50" />
+    <Property Name="lastname" Type="varchar" MaxLength="50" />
+    <Property Name="username" Type="varchar" MaxLength="50" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="password" Type="varchar" MaxLength="50" />
+    <Property Name="emailVerified" Type="bit" />
+    <Property Name="emailCode" Type="uniqueidentifier" />
+    <Property Name="IBAN" Type="varchar" MaxLength="50" />
+    <Property Name="SWIFT" Type="varchar" MaxLength="50" />
+    <Property Name="REFERENCE" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_trans_history_user_table">
+    <End Role="user_table" Type="Self.user_table" Multiplicity="0..1" />
+    <End Role="trans_history" Type="Self.trans_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_table">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="trans_history">
+        <PropertyRef Name="buyer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_trans_history_user_table1">
+    <End Role="user_table" Type="Self.user_table" Multiplicity="0..1" />
+    <End Role="trans_history" Type="Self.trans_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_table">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="trans_history">
+        <PropertyRef Name="seller" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="exchange_dbModel1StoreContainer">
+    <EntitySet Name="trans_history" EntityType="Self.trans_history" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_table" EntityType="Self.user_table" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_trans_history_user_table" Association="Self.FK_trans_history_user_table">
+      <End Role="user_table" EntitySet="user_table" />
+      <End Role="trans_history" EntitySet="trans_history" />
+    </AssociationSet>
+    <AssociationSet Name="FK_trans_history_user_table1" Association="Self.FK_trans_history_user_table1">
+      <End Role="user_table" EntitySet="user_table" />
+      <End Role="trans_history" EntitySet="trans_history" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

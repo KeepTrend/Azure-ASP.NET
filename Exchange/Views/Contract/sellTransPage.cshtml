@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewBag.Title = "sellTransPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/green.css")
+@Styles.Render("~/Content/userpage.css")
+<link rel="stylesheet" type="text/css" href="~/Content/login.css">
+<script type="text/javascript" src="~/Scripts/jquery.qrcode.min.js"></script>
+<section id="">
+    <div class="content margin-bottom60">
+        <div class="container">
+            <div class="row m-t-150">
+                <div id="sidebar" class="sidebar  col-sm-3 col-md-3 col-lg-3">
+                    <div class="">
+                        <h3 class="text-green font-weight-bold">BTCUSD</h3>
+                        <h3 class="text-white" id="currentPrice">@Session["currentPrice"]</h3>
+                        <h4 class="text-white">price now</h4>
+                    </div>
+                </div>
+                <!-- Left Section -->
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    <div class="col-sm-10 p-l-80 col-md-10 col-lg-10">
+                        <h3 class="text-white dis-inline">Dear</h3>
+                        <h3 class="text-green dis-inline">@Session["username"], </h3>
+                        <h3 class="text-white dis-inline">we try our best to have a smooth transaction, so as a last step, Please send now your </h3>
+                        <h3 class="text-green dis-inline">@ViewData["btc_amount"] BTC</h3>
+                        <h3 class="text-white dis-inline">to our wallet ID</h3>
+                        <h3 class="text-green">@ViewData["holdWallet"]</h3>
+                        <h3 class="text-white">to complete the transaction</h3>
+                    </div>
+                    <div class="col-sm-10 p-l-80 m-t-50 col-md-10 col-lg-10 row">
+                        <div class="col-sm-3 col-md-3 col-lg-3" id="qrcode"></div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="border-green row">
+                                <div class="col-lg-6">
+                                    <h3 class="text-white">Balance</h3>
+                                </div>
+                                <div class="col-lg-6 text-right">
+                                     <h3 class="text-white" id="myBalance">0</h3>                                
+                                </div>
+                            </div>
+                            <div class="col-12 text-right m-t-10">
+                                <h2 class="text-white" id="remainTime">48:00:00</h2>
+                            </div>
+                            <div class="col-12 text-right m-t-5">
+                                <h5 class="text-white">TIME  REMAINING</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-10 p-l-80 m-t-50 col-md-10 col-lg-10">
+                        <p class="text-white">
+                            We will keep this amount in our wallet for maximum 48 hours, and we will release it to the other party only
+                            after you confirm to us that you have received the wire in your bank account. In case you will not receive the
+                            wire within 48 hours, we will return the BTC back in a wallet that you will indicate us.
+                        </p>
+                    </div>
+                    <div class="col-sm-10 p-l-80 m-t-50 col-md-10 col-lg-10 row">
+                        <div class="col-sm-6 col-md-6 col-lg-6 dis-inline">
+                            @Html.ActionLink("I HAVE RECEIVED THE WIRE", "recievedWire", "Contract", new { transID = ViewData["transID"].ToString() }, htmlAttributes: new { @class = "btn login100-form-btn btn-signup" })
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6 dis-inline">
+                            <button class="btn login100-form-btn btn-signup">
+                                CANCEL TRANSACTION
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Main Content -->
+</section>
+
+<script>
+    $(document).ready(function () {
+        var timer = setInterval(function () {
+            $.ajax({
+                url: "@Url.Action("getBalance", "Contract")",
+                method: "post",
+                contentType: 'application/json',
+                success: function (result) {
+                    console.log(result);
+                    $("#myBalance").html(result);
+                    if (parseFloat(result) >= parseFloat("@ViewData["btc_amount"]")) {
+                        clearInterval(timer);
+                    }
+                }
+            });
+        }, 2000);
+
+        var remainTime = 48 * 60 * 60 - Math.floor(@ViewData["sellTime"]);
+        var selltimer = setInterval(function () {
+            if (remainTime <= 0) {
+                clearInterval(selltimer);
+                remainTime = 0;
+            }
+            var hour = Math.floor(remainTime / 3600);
+            var minute = Math.floor((remainTime % 3600) / 60);
+            var second = remainTime % 60;
+            var str = hour + ":" + (minute < 10 ? "0" : "") + minute + ":" + (second < 10 ? "0" : "") + second;
+            remainTime--;
+            $("#remainTime").html(str);
+        },1000)
+        $('#qrcode').qrcode({ width: 100, height: 100, text: "@ViewData["holdWallet"]" });
+    });
+</script>
+

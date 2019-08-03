@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="exchange_dbModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="trans_history">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="buyer" Type="Int32" />
+    <Property Name="seller" Type="Int32" />
+    <Property Name="btc" Type="Double" />
+    <Property Name="cash" Type="Double" />
+    <Property Name="holdBTC" Type="Boolean" />
+    <Property Name="sentBTC" Type="Boolean" />
+    <Property Name="sentCash" Type="Boolean" />
+    <Property Name="recieveCash" Type="Boolean" />
+    <Property Name="holdTransID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sentTransID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="holdWallet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="buyerWallet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="user_buyer" Relationship="Self.FK_trans_history_user_table" FromRole="trans_history" ToRole="user_table" />
+    <NavigationProperty Name="user_seller" Relationship="Self.FK_trans_history_user_table1" FromRole="trans_history" ToRole="user_table" />
+  </EntityType>
+  <EntityType Name="user_table">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="emailVerified" Type="Boolean" />
+    <Property Name="emailCode" Type="Guid" />
+    <Property Name="IBAN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SWIFT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="REFERENCE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="trans_history" Relationship="Self.FK_trans_history_user_table" FromRole="user_table" ToRole="trans_history" />
+    <NavigationProperty Name="trans_history1" Relationship="Self.FK_trans_history_user_table1" FromRole="user_table" ToRole="trans_history" />
+  </EntityType>
+  <Association Name="FK_trans_history_user_table">
+    <End Role="user_table" Type="Self.user_table" Multiplicity="0..1" />
+    <End Role="trans_history" Type="Self.trans_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_table">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="trans_history">
+        <PropertyRef Name="buyer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_trans_history_user_table1">
+    <End Role="user_table" Type="Self.user_table" Multiplicity="0..1" />
+    <End Role="trans_history" Type="Self.trans_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_table">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="trans_history">
+        <PropertyRef Name="seller" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AzureConnection" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="trans_history" EntityType="Self.trans_history" />
+    <EntitySet Name="user_table" EntityType="Self.user_table" />
+    <AssociationSet Name="FK_trans_history_user_table" Association="Self.FK_trans_history_user_table">
+      <End Role="user_table" EntitySet="user_table" />
+      <End Role="trans_history" EntitySet="trans_history" />
+    </AssociationSet>
+    <AssociationSet Name="FK_trans_history_user_table1" Association="Self.FK_trans_history_user_table1">
+      <End Role="user_table" EntitySet="user_table" />
+      <End Role="trans_history" EntitySet="trans_history" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

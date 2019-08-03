@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "user_info";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/userinfo.css">
+<section id="">
+    <div class="content margin-bottom60">
+        <div class="container">
+            <div class="row m-t-150">
+                <div id="sidebar" class="sidebar  col-sm-3 col-md-3 col-lg-3">
+                    <div class="">
+                        <h3 class="text-green font-weight-bold">BTCUSD</h3>
+                        <h3 class="text-white" id="currentPrice"></h3>
+                        <h4 class="text-white">price now</h4>
+                    </div>
+                </div>
+                <!-- Left Section -->
+                <div class="user-info">
+                    <div class="userinfo-sub-content">
+                        <p>Username :</p>
+                        <p>@ViewData["username"]</p>
+                    </div>
+                    <div class="userinfo-sub-content">
+                        <p>Stars :</p>
+                        <div id="star_rate"></div>
+                    </div>
+                    <div class="userinfo-sub-content">
+                        <p>Rated by :</p>
+                        <p>@ViewData["rated_users"] users</p>
+                    </div>
+                    <div class="userinfo-sub-content">
+                        <p>Positive Reviews :</p>
+                        <p>@ViewData["positive"]%</p>
+                    </div>
+                    <div class="userinfo-sub-content">
+                        <p>No of Transactions so far :</p>
+                        <p>@ViewData["no_trans"]</p>
+                    </div>
+                    <div class="userinfo-sub-content">
+                        <p>BTC turnover from transactions :</p>
+                        <p>@ViewData["btc"]</p>
+                    </div>                    
+                    <div class="userinfo-sub-content">
+                        <p>Average Transaction Size :</p>
+                        <p>@ViewData["cash"] USD</p>
+                    </div>
+                    <div class="userinfo-sub-content">
+                        <p>Country :</p>
+                        <p>@ViewData["country"]</p>
+                    </div>
+                    <div class="userinfo-sub-content">
+                        <p>City :</p>
+                        <p>@ViewData["city"]</p>
+                    </div>
+                    <div class="userinfo-sub-content">
+                        <p>Average Transaction Speed :</p>
+                        <p>@ViewData["avg"]hr</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Main Content -->
+</section>
+
+<script>
+    function onload(event) {
+        var starRating3 = raterJs({
+            max: @ViewData["star"],
+            starSize: 16,
+            readOnly: true,
+            rating: 5,
+            element: document.querySelector("#star_rate")
+        });
+    };
+    window.addEventListener("load", onload, false);
+</script>

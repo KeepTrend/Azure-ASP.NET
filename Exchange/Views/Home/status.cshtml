@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "status";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Exchange.AzureModel.trans_history[] trans = (Exchange.AzureModel.trans_history[])ViewData["trans"];
+}
+@Styles.Render("~/Content/table.css")
+<section id="">
+    <div class="content margin-bottom60">
+        <div class="container">
+            <div class="row m-t-150">
+                <div id="sidebar" class="sidebar  col-sm-3 col-md-3 col-lg-3">
+                    <div class="">
+                        <h3 class="text-green font-weight-bold">BTCUSD</h3>
+                        <h3 class="text-white" id="currentPrice"></h3>
+                        <h4 class="text-white">price now</h4>
+                    </div>
+                </div>
+                <!-- Left Section -->
+                <div class="">
+                    <table class="mx-auto">
+                        <thead>
+                            <tr class="first last">
+                                <th>USER</th>
+                                <th>COUNTRY</th>
+                                <th>SIGNUP</th>
+                                <th>BTC AMOUNT</th>
+                                <th>CASH</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (trans != null)
+                            {
+                                for (var i = 0; i < trans.Length; i++)
+                                {
+
+                                    if (Session["email"].ToString() == trans[i].user_buyer.email)
+                                    {
+                                        <tr onclick="goToBuy(@trans[i].id)" style="cursor:pointer">
+                                            <td>@trans[i].user_seller.username</td>
+                                            <td> <img src="https://www.countryflags.io/@trans[i].user_seller.country/flat/64.png" alt="" /></td>
+                                            <td>@trans[i].user_seller.signup.ToString()</td>
+                                            <td>@trans[i].btc</td>
+                                            <td>$@trans[i].cash</td>
+                                            <td>BUY BTC</td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        <tr onclick="goToSell(@trans[i].id)" style="cursor:pointer">
+                                            <td>@trans[i].user_buyer.username</td>
+                                            <td> <img src="https://www.countryflags.io/@trans[i].user_buyer.country/flat/64.png" alt="" /></td>
+                                            <td>@trans[i].user_buyer.signup.ToString()</td>
+                                            <td>@trans[i].btc</td>
+                                            <td>$@trans[i].cash</td>
+                                            <td>SELL BTC</td>
+                                        </tr>
+                                    }
+                                }
+                             }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Main Content -->
+</section>
+
+<script>
+    function goToBuy(id) {
+        location.href = "/Contract/buyTransPage/" + id;
+    }
+    function goToSell(id) {
+        location.href = "/Contract/sellTransPage/" + id;
+    }
+</script>

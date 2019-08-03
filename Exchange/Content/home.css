@@ -1,0 +1,63 @@
+﻿
+@import '../fonts/myriadpro/style.css';
+body {
+    background-color: #1652f0;
+    align-content: center;
+}
+.bg-green{
+    background-color:rgb(53, 207, 140);
+}
+.text-inYourCity {
+    color: #fd6205;
+}
+.homebtn {
+    border: none;
+    border-radius: 4px;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight:bold;
+    padding: 10px 25px 10px 24px;
+}
+.text-red{
+    color:red;
+}
+.homeInput {
+    color: #3acc8a;
+    font-family: "Myriad Pro Regular";
+    border-radius: 2px;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100px;
+    border: 0;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropbtn {
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 80px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    cursor:pointer;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+
+

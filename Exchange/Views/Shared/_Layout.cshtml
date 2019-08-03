@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link rel="icon" type="image/png" href="~/images/icons/favico.png" />
+    <link rel="stylesheet" type="text/css" href="~/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="~/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="~/vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="~/vendor/country-select-js-master/build/css/countrySelect.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/util.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Site.css">
+    @Styles.Render("~/Content/home.css")
+    @Styles.Render("~/Content/creative.css")
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div class="container">
+                @Html.ActionLink("trustbtc", "", "Home", null, htmlAttributes: new { @class = "font-logo navbar-brand js-scroll-trigger" })
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            @if (Session["username"] == null)
+                            {
+                                @Html.ActionLink("Sign in", "Login", "User_Login", null, htmlAttributes: new { @class = "nav-link js-scroll-trigger" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Sign out", "Logout", "User_Login", null, htmlAttributes: new { @class = "nav-link js-scroll-trigger" })
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @if (Session["username"] == null)
+                            {
+                                @Html.ActionLink("Get Started", "getStarted", "User_Login", null, htmlAttributes: new { @class = "nav-link js-scroll-trigger border-white" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("My Account", "", "User", null, htmlAttributes: new { @class = "nav-link js-scroll-trigger" })
+                            }
+
+                        </li>
+                        @if (Session["username"] != null)
+                        {
+                            <li class="nav-item">
+                                @Html.ActionLink("Status", "status", "Home", null, htmlAttributes: new { @class = "nav-link js-scroll-trigger" })
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container mx-auto">
+            @RenderBody()
+        </div>
+
+    </div>
+    <script src="~/vendor/animsition/js/animsition.min.js"></script>
+    <script src="~/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/vendor/select2/select2.min.js"></script>
+    <script src="~/vendor/daterangepicker/moment.min.js"></script>
+    <script src="~/vendor/daterangepicker/daterangepicker.js"></script>
+    <script src="~/vendor/countdowntime/countdowntime.js"></script>
+    <script src="~/vendor/scrollreveal/scrollreveal.min.js"></script>
+    <script src="~/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="~/vendor/country-select-js-master/build/js/countrySelect.min.js"></script>
+    <script src="~/vendor/rater-js-master/index.js"></script>
+    <script src="~/vendor/iban.js/iban.js"></script>
+    <script src="~/Scripts/Custom/creative.js"></script>
+    <script src="~/Scripts/Custom/login.js"></script>
+    <script>
+        $(document).ready(function () {
+             $.ajax({
+                url: "@Url.Action("getCurrentPrice", "Home")",
+                method: "post",
+                contentType: 'application/json',
+                success: function (result) {
+                    $("#currentPrice").html(result);
+                    console.log(result);
+                }
+            });
+            setInterval(function () {
+                $.ajax({
+                    url: "@Url.Action("getCurrentPrice", "Home")",
+                    method: "post",
+                    contentType: 'application/json',
+                    success: function (result) {
+                        $("#currentPrice").html(result);
+                        console.log(result);
+                    }
+                });
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

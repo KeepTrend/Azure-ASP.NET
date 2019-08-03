@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LocalDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="trans_history">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="buyer" Type="int" />
+    <Property Name="seller" Type="int" />
+    <Property Name="btc" Type="float" />
+    <Property Name="cash" Type="float" />
+    <Property Name="holdBTC" Type="bit" />
+    <Property Name="sentBTC" Type="bit" />
+    <Property Name="sentCash" Type="bit" />
+    <Property Name="recieveCash" Type="bit" />
+    <Property Name="holdTransID" Type="varchar" MaxLength="50" />
+    <Property Name="sentTransID" Type="varchar" MaxLength="50" />
+    <Property Name="status" Type="varchar" MaxLength="50" />
+    <Property Name="holdWallet" Type="varchar" MaxLength="50" />
+    <Property Name="buyerWallet" Type="varchar" MaxLength="50" />
+    <Property Name="firstname_seller" Type="varchar" MaxLength="50" />
+    <Property Name="lastname_seller" Type="varchar" MaxLength="50" />
+    <Property Name="IBAN" Type="varchar" MaxLength="50" />
+    <Property Name="SWIFT" Type="varchar" MaxLength="50" />
+    <Property Name="REFERENCE" Type="varchar" MaxLength="50" />
+    <Property Name="sellTime" Type="datetime" />
+    <Property Name="buyTime" Type="datetime" />
+    <Property Name="holdAmount" Type="float" />
+  </EntityType>
+  <EntityType Name="user_table">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="firstname" Type="varchar" MaxLength="50" />
+    <Property Name="lastname" Type="varchar" MaxLength="50" />
+    <Property Name="username" Type="varchar" MaxLength="50" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="password" Type="varchar" MaxLength="50" />
+    <Property Name="emailVerified" Type="bit" />
+    <Property Name="emailCode" Type="uniqueidentifier" />
+    <Property Name="IBAN" Type="varchar" MaxLength="50" />
+    <Property Name="SWIFT" Type="varchar" MaxLength="50" />
+    <Property Name="country" Type="varchar" MaxLength="50" />
+    <Property Name="city" Type="varchar" MaxLength="50" />
+    <Property Name="signup" Type="date" />
+    <Property Name="listme" Type="bit" />
+    <Property Name="qrkey" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="user_buyer">
+    <End Role="user_table" Type="Self.user_table" Multiplicity="0..1" />
+    <End Role="trans_history" Type="Self.trans_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_table">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="trans_history">
+        <PropertyRef Name="buyer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="user_seller">
+    <End Role="user_table" Type="Self.user_table" Multiplicity="0..1" />
+    <End Role="trans_history" Type="Self.trans_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_table">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="trans_history">
+        <PropertyRef Name="seller" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LocalDBModelStoreContainer">
+    <EntitySet Name="trans_history" EntityType="Self.trans_history" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_table" EntityType="Self.user_table" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="user_buyer" Association="Self.user_buyer">
+      <End Role="user_table" EntitySet="user_table" />
+      <End Role="trans_history" EntitySet="trans_history" />
+    </AssociationSet>
+    <AssociationSet Name="user_seller" Association="Self.user_seller">
+      <End Role="user_table" EntitySet="user_table" />
+      <End Role="trans_history" EntitySet="trans_history" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

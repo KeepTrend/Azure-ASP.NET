@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "mytrans";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+    Exchange.AzureModel.trans_history[] trans = (Exchange.AzureModel.trans_history[])ViewData["trans"];
+}
+@Styles.Render("~/Content/table.css");
+<div class="m-t-150">
+    <table class="mx-auto">
+        <thead>
+            <tr class="first last">
+                <th>USER</th>
+                <th>COUNTRY</th>
+                <th>SIGNUP</th>
+                <th>BTC AMOUNT</th>
+                <th>CASH</th>
+                <th>STATUS</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (trans != null)
+            {
+                for (var i = 0; i < trans.Length; i++)
+                {
+                <tr>
+                    @if (Session["email"].ToString() == trans[i].user_buyer.email)
+                    {
+                        <td>@trans[i].user_seller.username</td>
+                        <td> <img src="https://www.countryflags.io/@trans[i].user_seller.country/flat/64.png" alt="" /></td>
+                        <td>@trans[i].user_seller.signup.ToString()</td>
+                    }
+                    else
+                    {
+                        <td>@trans[i].user_buyer.username</td>
+                        <td> <img src="https://www.countryflags.io/@trans[i].user_buyer.country/flat/64.png" alt="" /></td>
+                        <td>@trans[i].user_buyer.signup.ToString()</td>
+                    }
+                    <td>@trans[i].btc</td>
+                    <td>@trans[i].cash</td>
+                    <td>@trans[i].status</td>
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+

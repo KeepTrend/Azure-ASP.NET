@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "uploadReciptPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/green.css")
+@Styles.Render("~/Content/userpage.css")
+<link rel="stylesheet" type="text/css" href="~/Content/login.css">
+<section id="">
+    <div class="content margin-bottom60">
+        <div class="container">
+            <div class="row m-t-150">
+                <div id="sidebar" class="sidebar  col-sm-3 col-md-3 col-lg-3">
+                    <div class="">
+                        <h3 class="text-green font-weight-bold">BTCUSD</h3>
+                        <h3 class="text-white" id="currentPrice">@Session["currentPrice"]</h3>
+                        <h4 class="text-white">price now</h4>
+                    </div>
+                </div>
+                <!-- Left Section -->
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    @using (Html.BeginForm("uploadRecipt", "Contract", FormMethod.Post, new { @class = "login100-form validate-form flex-sb flex-w", role = "form" , enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()                        
+                        <div class="col-sm-6 m-t-50 col-md-6 col-lg-6 m-l-50">
+                            <img src="~/images/open.png" class="w-100 bgwhite" id="recipt_image" alt="Browse" onerror="this.style.display='none'" />
+                            <input type="file" style="display:none" name="file" id="file_open" />
+                        </div>
+                        <div class="m-t-30 m-l-60 col-sm-6 col-md-6 col-lg-6 p-l-50">
+                            <h4 class="text-white">Please upload your bank statement that shows your wire transfer.</h4>
+                        </div>
+                        <div class="col-sm-6 p-l-80 m-t-50 col-md-6 col-lg-6">
+                            <div class="container-login100-form-btn m-t-17">
+                                <button class="btn login100-form-btn btn-signup">
+                                    UPLOAD
+                                </button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Main Content -->
+</section>
+
+<script>
+    $(document).ready(function () {
+        $("#recipt_image").click(function () {
+            $("#file_open").click();
+        });
+        $("#file_open").on("change", function (evt) {
+            var fullpath = URL.createObjectURL(evt.target.files[0]);
+            $("#recipt_image").attr("src", fullpath);
+        })
+    });
+</script>
